@@ -1,0 +1,32 @@
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.bgoftheday {
+    color:blue;
+    text-align: center;
+}
+.error {
+    color: red;
+}
+.randomGame
+{
+    border: 2px solid black;
+    background: lightgrey;
+    margin: auto;
+}
+
+.register
+{
+    border: 2px solid black;    
+}
+
+.login
+{
+    border: 2px solid black;
+
+}
+#allcontent {
+    margin-top: 20px;
+}

@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <textarea rows="2" cols="75" class="search" [(ngModel)]="searchText" placeholder="Search for a Game!"></textarea>
+  <!-- <input type="text" name="search" class="search" [(ngModel)]="searchText" placeholder="Search for a Game!"> -->
+  <br>
+  <h1>Welcome {{user_info?.first_name}}</h1>
+  <!-- <div [ngStyle]="{
+        'background-color': 'grey'}"> -->
+  <div class="game row mb-3" *ngFor="let games of allGames | filter:'title':searchText">
+    <div class="col-9">
+      <h2>{{games.title}}</h2>
+      <p>{{games.description}}</p>
+      <p>Condition: {{games.condition}}</p>
+    </div>
+    <div class="col-3">
+      <h2>${{games.price}}</h2>
+      <p>{{games.location}}</p>
+      <button *ngIf="(games._user) === (session)" class="btn btn-danger" (click)="deleteGame(games._id)">Delete</button>
+      <button *ngIf="(games._user) != (session)" class="btn btn-info">Contect Seller</button>
+      <!-- <p-dialog header="Title" [(visible)]="display" *ngIf="games._user != session">
+            <!-- <button type="button" class="btn btn-primary" >Placeholder</button> -->
+      <!-- <button type="text" (click)="showDialog()" pButton icon="fa-external-link-square" label="Show"></button> -->
+      <!-- </p-dialog> -->
+    </div>
+  </div>
+</div>

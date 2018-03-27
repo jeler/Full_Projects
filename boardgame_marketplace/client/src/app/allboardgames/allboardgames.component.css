@@ -1,0 +1,30 @@
+.right {
+    font-size: 16pt;
+}
+.game {
+    border: 2px solid black;
+    overflow: scroll;
+    z-index:-1
+}
+.row
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+.search
+{
+    margin-top: 120px;
+    z-index:-1
+}
+
+/* input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+/* input[type=text]:focus {
+    width: 100%;
+} * */
