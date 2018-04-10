@@ -25,7 +25,7 @@
                             <div class="col-sm-8">         
                                 <input type="text" 
                                 name="UserReg.email" required [(ngModel)]="UserReg.email" #email ="ngModel" class="col-md-12"/>
-                                <div class="error"*ngIf="!email.valid && email  .touched">Email is not valid!</div> 
+                                <div class="error"*ngIf="!email.valid && email.touched">Email is not valid!</div> 
                             </div>
                         </div>
                         <div class="form-group row my-2">
