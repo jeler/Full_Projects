@@ -21,6 +21,8 @@ app.all("*", (req, res, next) => {
     res.sendFile(path.resolve("./client/dist/index.html"))
 })
 
-app.listen(1337, function () {
-    console.log("listening on port 1337");
-})
+// app.listen(1337, function () {
+//     console.log("listening on port 1337");
+// })
+
+app.listen(process.env.PORT || 8080);
