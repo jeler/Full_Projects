@@ -1,0 +1,40 @@
+/Users/eler/Documents/Belt Exams/C#/bright_ideas/bin/Debug/netcoreapp1.1/bright_ideas.deps.json
+/Users/eler/Documents/Belt Exams/C#/bright_ideas/bin/Debug/netcoreapp1.1/bright_ideas.runtimeconfig.json
+/Users/eler/Documents/Belt Exams/C#/bright_ideas/bin/Debug/netcoreapp1.1/bright_ideas.runtimeconfig.dev.json
+/Users/eler/Documents/Belt Exams/C#/bright_ideas/bin/Debug/netcoreapp1.1/bright_ideas.dll
+/Users/eler/Documents/Belt Exams/C#/bright_ideas/bin/Debug/netcoreapp1.1/bright_ideas.pdb
+/Users/eler/Documents/Belt Exams/C#/bright_ideas/obj/Debug/netcoreapp1.1/bright_ideas.csproj.CoreCompileInputs.cache
+/Users/eler/Documents/Belt Exams/C#/bright_ideas/obj/Debug/netcoreapp1.1/bright_ideas.AssemblyInfoInputs.cache
+/Users/eler/Documents/Belt Exams/C#/bright_ideas/obj/Debug/netcoreapp1.1/bright_ideas.AssemblyInfo.cs
+/Users/eler/Documents/Belt Exams/C#/bright_ideas/obj/Debug/netcoreapp1.1/bright_ideas.dll
+/Users/eler/Documents/Belt Exams/C#/bright_ideas/obj/Debug/netcoreapp1.1/bright_ideas.pdb
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2/bin/Debug/netcoreapp1.1/bright_ideas.deps.json
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2/bin/Debug/netcoreapp1.1/bright_ideas.runtimeconfig.json
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2/bin/Debug/netcoreapp1.1/bright_ideas.runtimeconfig.dev.json
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2/bin/Debug/netcoreapp1.1/bright_ideas.dll
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2/bin/Debug/netcoreapp1.1/bright_ideas.pdb
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2/obj/Debug/netcoreapp1.1/bright_ideas.csproj.CoreCompileInputs.cache
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2/obj/Debug/netcoreapp1.1/bright_ideas.AssemblyInfoInputs.cache
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2/obj/Debug/netcoreapp1.1/bright_ideas.AssemblyInfo.cs
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2/obj/Debug/netcoreapp1.1/bright_ideas.dll
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2/obj/Debug/netcoreapp1.1/bright_ideas.pdb
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2 2/bin/Debug/netcoreapp1.1/bright_ideas.deps.json
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2 2/bin/Debug/netcoreapp1.1/bright_ideas.runtimeconfig.json
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2 2/bin/Debug/netcoreapp1.1/bright_ideas.runtimeconfig.dev.json
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2 2/bin/Debug/netcoreapp1.1/bright_ideas.dll
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2 2/bin/Debug/netcoreapp1.1/bright_ideas.pdb
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2 2/obj/Debug/netcoreapp1.1/bright_ideas.csproj.CoreCompileInputs.cache
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2 2/obj/Debug/netcoreapp1.1/bright_ideas.AssemblyInfoInputs.cache
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2 2/obj/Debug/netcoreapp1.1/bright_ideas.AssemblyInfo.cs
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2 2/obj/Debug/netcoreapp1.1/bright_ideas.dll
+/Users/eler/Documents/Belt Exams/C#/bright_ideas 2 2/obj/Debug/netcoreapp1.1/bright_ideas.pdb
+/Users/eler/Documents/DojoAssignments/Full_Projects/idea_factory/bin/Debug/netcoreapp1.1/bright_ideas.deps.json
+/Users/eler/Documents/DojoAssignments/Full_Projects/idea_factory/bin/Debug/netcoreapp1.1/bright_ideas.runtimeconfig.json
+/Users/eler/Documents/DojoAssignments/Full_Projects/idea_factory/bin/Debug/netcoreapp1.1/bright_ideas.runtimeconfig.dev.json
+/Users/eler/Documents/DojoAssignments/Full_Projects/idea_factory/bin/Debug/netcoreapp1.1/bright_ideas.dll
+/Users/eler/Documents/DojoAssignments/Full_Projects/idea_factory/bin/Debug/netcoreapp1.1/bright_ideas.pdb
+/Users/eler/Documents/DojoAssignments/Full_Projects/idea_factory/obj/Debug/netcoreapp1.1/bright_ideas.csproj.CoreCompileInputs.cache
+/Users/eler/Documents/DojoAssignments/Full_Projects/idea_factory/obj/Debug/netcoreapp1.1/bright_ideas.AssemblyInfoInputs.cache
+/Users/eler/Documents/DojoAssignments/Full_Projects/idea_factory/obj/Debug/netcoreapp1.1/bright_ideas.AssemblyInfo.cs
+/Users/eler/Documents/DojoAssignments/Full_Projects/idea_factory/obj/Debug/netcoreapp1.1/bright_ideas.dll
+/Users/eler/Documents/DojoAssignments/Full_Projects/idea_factory/obj/Debug/netcoreapp1.1/bright_ideas.pdb
