@@ -27,7 +27,7 @@ module.exports = ".right {\n    font-size: 16pt;\n}\n.game {\n    border: 2px so
 /***/ "./src/app/allboardgames/allboardgames.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <textarea rows=\"2\" cols=\"75\" class=\"search\" [(ngModel)]=\"searchText\" placeholder=\"Search for a Game!\"></textarea>\n  <!-- <input type=\"text\" name=\"search\" class=\"search\" [(ngModel)]=\"searchText\" placeholder=\"Search for a Game!\"> -->\n  <br>\n  <h1>Welcome {{user_info?.first_name}}</h1>\n  <!-- <div [ngStyle]=\"{\n        'background-color': 'grey'}\"> -->\n  <div class=\"game row mb-3\" *ngFor=\"let games of allGames | filter:'title':searchText\">\n    <div class=\"col-9\">\n      <h2>{{games.title}}</h2>\n      <p>{{games.description}}</p>\n      <p>Condition: {{games.condition}}</p>\n    </div>\n    <div class=\"col-3\">\n      <h2>${{games.price}}</h2>\n      <p>{{games.location}}</p>\n      <button *ngIf=\"(games._user) === (session)\" class=\"btn btn-danger\" (click)=\"deleteGame(games._id)\">Delete</button>\n      <button *ngIf=\"(games._user) != (session)\" class=\"btn btn-info\">Contect Seller</button>\n      <!-- <p-dialog header=\"Title\" [(visible)]=\"display\" *ngIf=\"games._user != session\">\n            <!-- <button type=\"button\" class=\"btn btn-primary\" >Placeholder</button> -->\n      <!-- <button type=\"text\" (click)=\"showDialog()\" pButton icon=\"fa-external-link-square\" label=\"Show\"></button> -->\n      <!-- </p-dialog> -->\n    </div>\n  </div>\n</div>"
+module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <textarea rows=\"2\" cols=\"75\" class=\"search\" [(ngModel)]=\"searchText\" placeholder=\"Search for a Game!\"></textarea>\n  <!-- <input type=\"text\" name=\"search\" class=\"search\" [(ngModel)]=\"searchText\" placeholder=\"Search for a Game!\"> -->\n  <br>\n  <h1>Welcome {{user_info?.first_name}}</h1>\n  <!-- <div [ngStyle]=\"{\n        'background-color': 'grey'}\"> -->\n  <div class=\"game row mb-3\" *ngFor=\"let games of allGames | filter:'title':searchText\">\n    <div class=\"col-9\">\n      <h2>{{games.title}}</h2>\n      <p>{{games.description}}</p>\n      <p>Condition: {{games.condition}}</p>\n    </div>\n    <div class=\"col-3\">\n      <h2>${{games.price}}</h2>\n      <p>{{games.location}}</p>\n      <button *ngIf=\"(games._user) === (session)\" class=\"btn btn-danger\" (click)=\"deleteGame(games._id)\">Delete</button> \n      <button *ngIf=\"(games._user) == (session)\" class=\"btn btn-info\" [routerLink]=\"['/edit']\">Edit Listing</button>\n      <button *ngIf=\"(games._user) != (session)\" class=\"btn btn-info\">Contect Seller</button>\n      <!-- <p-dialog header=\"Title\" [(visible)]=\"display\" *ngIf=\"games._user != session\">\n            <!-- <button type=\"button\" class=\"btn btn-primary\" >Placeholder</button> -->\n      <!-- <button type=\"text\" (click)=\"showDialog()\" pButton icon=\"fa-external-link-square\" label=\"Show\"></button> -->\n      <!-- </p-dialog> -->\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -127,9 +127,11 @@ var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.j
 var home_component_1 = __webpack_require__("./src/app/home/home.component.ts");
 var user_dashboard_component_1 = __webpack_require__("./src/app/user-dashboard/user-dashboard.component.ts");
 var create_boardgame_component_1 = __webpack_require__("./src/app/create-boardgame/create-boardgame.component.ts");
+var edit_boardgames_component_1 = __webpack_require__("./src/app/edit-boardgames/edit-boardgames.component.ts");
 var routes = [
     { path: '', component: home_component_1.HomeComponent },
     { path: "createboardgame", component: create_boardgame_component_1.CreateBoardgameComponent },
+    { path: "edit", component: edit_boardgames_component_1.EditBoardgamesComponent },
     { path: "dashboard", component: user_dashboard_component_1.UserDashboardComponent },
     { path: "", pathMatch: 'full', redirectTo: '/' }
 ];
@@ -152,7 +154,7 @@ exports.AppRoutingModule = AppRoutingModule;
 /***/ "./src/app/app.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".bgmarketplace \n{\n    position: fixed;\n    color: white;\n    background: #343a40;\n    width: 100%;\n}"
+module.exports = ".bgmarketplace \n{\n    color: white;\n    background: #343a40;\n}"
 
 /***/ }),
 
@@ -228,6 +230,7 @@ var navbar_component_1 = __webpack_require__("./src/app/navbar/navbar.component.
 var filter_pipe_1 = __webpack_require__("./src/app/filter.pipe.ts");
 var create_boardgame_component_1 = __webpack_require__("./src/app/create-boardgame/create-boardgame.component.ts");
 var allboardgames_component_1 = __webpack_require__("./src/app/allboardgames/allboardgames.component.ts");
+var edit_boardgames_component_1 = __webpack_require__("./src/app/edit-boardgames/edit-boardgames.component.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -240,7 +243,8 @@ var AppModule = /** @class */ (function () {
                 navbar_component_1.NavbarComponent,
                 filter_pipe_1.FilterPipe,
                 create_boardgame_component_1.CreateBoardgameComponent,
-                allboardgames_component_1.AllboardgamesComponent
+                allboardgames_component_1.AllboardgamesComponent,
+                edit_boardgames_component_1.EditBoardgamesComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -342,6 +346,56 @@ var CreateBoardgameComponent = /** @class */ (function () {
     return CreateBoardgameComponent;
 }());
 exports.CreateBoardgameComponent = CreateBoardgameComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/edit-boardgames/edit-boardgames.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/edit-boardgames/edit-boardgames.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <h2>Do you work???</h2>\n</div>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/edit-boardgames/edit-boardgames.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var EditBoardgamesComponent = /** @class */ (function () {
+    function EditBoardgamesComponent() {
+    }
+    EditBoardgamesComponent.prototype.ngOnInit = function () {
+    };
+    EditBoardgamesComponent = __decorate([
+        core_1.Component({
+            selector: 'app-edit-boardgames',
+            template: __webpack_require__("./src/app/edit-boardgames/edit-boardgames.component.html"),
+            styles: [__webpack_require__("./src/app/edit-boardgames/edit-boardgames.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], EditBoardgamesComponent);
+    return EditBoardgamesComponent;
+}());
+exports.EditBoardgamesComponent = EditBoardgamesComponent;
 
 
 /***/ }),
@@ -572,14 +626,14 @@ exports.HttpService = HttpService;
 /***/ "./src/app/navbar/navbar.component.css":
 /***/ (function(module, exports) {
 
-module.exports = "nav {\n    position: fixed;\n    top: 20px;\n    width: 100%;\n    margin-top: 27px;\n}"
+module.exports = ""
 
 /***/ }),
 
 /***/ "./src/app/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n    <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n      <ul class=\"navbar-nav mr-auto\">\n        <li class=\"nav-item active\">\n          <a class=\"nav-link\" [routerLink]=\"['/dashboard']\">Home <span class=\"sr-only\">(current)</span></a>\n        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" [routerLink]=\"['/createboardgame']\">Create New Listing</a>\n        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" [routerLink]=\"['/myboardagames']\">My Listings</a>\n        </li>\n      </ul>\n      <form class=\"form-inline my-2 my-lg-0\">\n        <button class=\"btn btn-outline-success my-2 my-sm-0\" (click) = userLogout()>Logout</button>\n      </form>\n    </div>\n  </nav>\n<router-outlet></router-outlet>"
+module.exports = "<div class=\"container-fluid mt-5 position-fixed p-0\">\n  <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n          <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item active\">\n            <a class=\"nav-link\" [routerLink]=\"['/dashboard']\">Home <span class=\"sr-only\">(current)</span></a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/createboardgame']\">Create New Listing</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/myboardgames']\">My Listings</a>\n          </li>\n        </ul>\n        <form class=\"form-inline my-2 my-lg-0\">\n          <button class=\"btn btn-outline-success my-2 my-sm-0\" (click) = userLogout()>Logout</button>\n        </form>\n      </div>\n    </nav>\n\n</div>\n<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -638,7 +692,7 @@ module.exports = ".right {\n    font-size: 16pt;\n}\n.game {\n    border: 2px so
 /***/ "./src/app/user-dashboard/user-dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-allboardgames></app-allboardgames>\n  <!-- <div class=\"container\">\n    <textarea rows=\"2\" cols=\"75\" class=\"search\" [(ngModel)]=\"searchText\" placeholder=\"Search...\"></textarea>\n    <br>\n    <h2>Welcome {{user_info?.first_name}}</h2> -->\n      <!-- <div [ngStyle]=\"{\n        'background-color': 'grey'}\"> -->\n      <!-- <div class=\"game\" *ngFor=\"let games of allGames | filter:'title':searchText\">\n        <div class=\"row\">\n          <div class=\"col\">\n              <h2>{{games.title}}</h2>\n              <p>{{games.description}}</p>\n              <p>Condition: {{games.condition}}</p>\n          </div> \n          <div class=\"col\">\n            <h2>{{games.price}}</h2>\n            <p>{{games.location}}</p>\n            <p *ngIf=\"(games._user) === (session)\">\n            <button>Delete</button></p>\n            <p *ngIf=\"games._user != session\">\n              <button>Placeholder</button>\n            </p>\n          </div>\n        </div>\n      </div>\n    </div> -->\n<router-outlet></router-outlet> \n"
+module.exports = "<app-allboardgames></app-allboardgames>\n  <!-- <div class=\"container\">\n    <textarea rows=\"2\" cols=\"75\" class=\"search\" [(ngModel)]=\"searchText\" placeholder=\"Search...\"></textarea>\n    <br>\n    <h2>Welcome {{user_info?.first_name}}</h2> -->\n      <!-- <div [ngStyle]=\"{\n        'background-color': 'grey'}\"> -->\n      <!-- <div class=\"game\" *ngFor=\"let games of allGames | filter:'title':searchText\">\n        <div class=\"row\">\n          <div class=\"col\">\n              <h2>{{games.title}}</h2>\n              <p>{{games.description}}</p>\n              <p>Condition: {{games.condition}}</p>\n          </div> \n          <div class=\"col\">\n            <h2>{{games.price}}</h2>\n            <p>{{games.location}}</p>\n            <p *ngIf=\"(games._user) === (session)\">\n            <button>Delete</button></p>\n            <p *ngIf=\"games._user != session\">\n              <button>Placeholder</button>\n            </p>\n          </div>\n        </div>\n      </div>\n    </div> -->\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 

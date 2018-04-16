@@ -8,16 +8,16 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  
   constructor(private _httpService: HttpService, private _router: Router) { }
 
   ngOnInit() {
   }
 
-  userLogout()
-  {
+
+  userLogout() {
     let observable = this._httpService.userLogout();
     observable.subscribe(data => console.log(data, "this is data!"))
-    this._router.navigateByUrl("/")            
+    this._router.navigateByUrl("/")
   }
 }

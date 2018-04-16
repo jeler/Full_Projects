@@ -4,11 +4,13 @@ import { HomeComponent } from './home/home.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { CreateBoardgameComponent } from './create-boardgame/create-boardgame.component';
 import { AllboardgamesComponent } from './allboardgames/allboardgames.component';
+import { EditBoardgamesComponent } from './edit-boardgames/edit-boardgames.component';
 
  
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: "createboardgame", component: CreateBoardgameComponent},
+  {path: "edit", component: EditBoardgamesComponent},
   {path: "dashboard", component: UserDashboardComponent},
   {path: "", pathMatch: 'full', redirectTo: '/'}
 

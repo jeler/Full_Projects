@@ -11,8 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FilterPipe }from './filter.pipe';
 import { CreateBoardgameComponent } from './create-boardgame/create-boardgame.component';
 import { AllboardgamesComponent } from './allboardgames/allboardgames.component';
-
-
+import { EditBoardgamesComponent } from './edit-boardgames/edit-boardgames.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,8 @@ import { AllboardgamesComponent } from './allboardgames/allboardgames.component'
     NavbarComponent,
     FilterPipe,
     CreateBoardgameComponent,
-    AllboardgamesComponent
+    AllboardgamesComponent,
+    EditBoardgamesComponent
   ],
   imports: [
     BrowserModule,
