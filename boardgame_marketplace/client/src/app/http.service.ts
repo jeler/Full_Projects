@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class HttpService {
@@ -8,46 +10,49 @@ export class HttpService {
 
   createNewUser(UserReg)
   {
-    console.log(UserReg)
     return this._http.post('createnewuser', UserReg)
   }
 
   loginUser(UserLog)
   {
-    console.log(UserLog)
     return this._http.post('loginuser', UserLog)
     
   }
   checkSessionUser()
   {
-    console.log("in session check service!")
     return this._http.get('check_session')
   }
   userLogout()
   {
-    console.log("here from nav bar!")
     return this._http.get('logout')
   }
   createBoardGame(BoardGameCreate)
   {
-    console.log("here from component!", BoardGameCreate)
     return this._http.post('creategame', BoardGameCreate)
   }
 
   getAllGames()
   {
-    console.log("here in your base at 39!")
     return this._http.get('findgames')
   }
 
   deleteGame(id)
   {
-    console.log("here in delete!", id)
     return this._http.get('/delete/' + id)
   }
   randomGame()
   {
-    console.log("got here in randomgame")
     return this._http.get('random')
+  }
+
+  getGame(id) {
+    return this._http.get('/get_game/' + id)
+  }
+
+  editGame(game)
+  {
+    console.log("here in editted game!")
+    console.log(game.id)
+    return this._http.post('/edit_game', game)
   }
 }

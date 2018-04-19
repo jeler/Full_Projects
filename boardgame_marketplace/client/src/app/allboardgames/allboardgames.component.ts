@@ -17,7 +17,6 @@ export class AllboardgamesComponent implements OnInit
   user_info: any;
   allGames: any;
   session: any;
-  // display: boolean = false;
   
   ngOnInit() {
     this.getGames();    
@@ -28,8 +27,6 @@ export class AllboardgamesComponent implements OnInit
   {
     var session_data = this._httpService.checkSessionUser();
     session_data.subscribe(data => {
-      console.log(data, "this is data!")
-      console.log(data["session"])
       if(data["session"]== false)
       {
         console.log("got here!")
@@ -37,10 +34,8 @@ export class AllboardgamesComponent implements OnInit
       }
       else 
       {
-        console.log("got here to give user data!")
         this.user_info = data["user"]
         this.session = data["session"]
-        console.log(this.user_info)
       }
     })
   }
@@ -48,27 +43,14 @@ export class AllboardgamesComponent implements OnInit
   getGames()
   {
     let allGames = this._httpService.getAllGames().subscribe(data => {
-      console.log(data, "all the data!")
       this.allGames = data["games"];
-      console.log(this.allGames)
     })
   }
 
   deleteGame(id)
   {
     let deleteGame = this._httpService.deleteGame(id).subscribe(data => {
-      console.log("able to get here!")
       this.getGames();                 
-      
     })
   }
-
-  buttonTest()
-  {
-    console.log("are you there god its me margaret")
-  }
-
-  // showDialog() {
-  //   this.display = true;
-  // }
 }

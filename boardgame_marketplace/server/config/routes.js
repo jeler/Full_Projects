@@ -22,6 +22,8 @@ function(app)
 
     app.post('/creategame', boardgame.creategame)
 
+    app.post('/edit_game/', boardgame.edit_game)    
+
     app.get('/logout', user.logout)
 
     app.get('/check_session', user.checkSessionId)
@@ -32,5 +34,6 @@ function(app)
 
     app.get('/random', boardgame.random)
 
+    app.get('/get_game/:id', boardgame.get_game)   
 
 }

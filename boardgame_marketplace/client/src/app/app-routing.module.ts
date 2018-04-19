@@ -10,8 +10,8 @@ import { EditBoardgamesComponent } from './edit-boardgames/edit-boardgames.compo
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: "createboardgame", component: CreateBoardgameComponent},
-  {path: "edit", component: EditBoardgamesComponent},
   {path: "dashboard", component: UserDashboardComponent},
+  {path: "edit/:id", component: EditBoardgamesComponent},
   {path: "", pathMatch: 'full', redirectTo: '/'}
 
 ];

@@ -1,5 +1,31 @@
 <app-navbar></app-navbar>
-<div class="container">
-  <h2>Do you work???</h2>
+<br><br><br>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-8 editgame">
+      <div *ngIf="game">
+          <form #editbgform="ngForm" (submit)=editBoardgame()>
+            <p>Title</p>
+            <input name="title" required [(ngModel)]="game.title" #title="ngModel" />
+            <div class="error" *ngIf="!title.valid && (title.touched)">Title is required!</div>
+            <p>Description</p>
+              <textarea rows="4" cols="50" name="description" required maxlength="200" [(ngModel)]="game.description" #description="ngModel"></textarea>
+            <div class="error" *ngIf="!description.valid && (description.touched)">Description is required!</div>
+            <p>Price</p>
+            <input type="number" name="price" required [(ngModel)]="game.price" #price="ngModel" />
+            <div class="error" *ngIf="!price.valid && (price.touched)">Price is required!</div>
+            <p>Location</p>
+              <input type="text" name="location" required [(ngModel)]="game.location" #location="ngModel" />
+            <div class="error" *ngIf="!location.valid && (location.touched)">Location is required!</div>
+            <p>Condition</p>
+              <select name="game.condition" [(ngModel)]="game.condition">
+                <option value="Used">Used</option>
+                <option value="Like New">Like New</option>
+                <option value="New">New</option>
+              </select>
+              <br><br>
+            <p><input type="submit" [disabled]="!editbgform.form.valid"></p>
+          </form>
+    </div>
+  </div>
 </div>
-

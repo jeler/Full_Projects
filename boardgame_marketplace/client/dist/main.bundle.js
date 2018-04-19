@@ -27,7 +27,7 @@ module.exports = ".right {\n    font-size: 16pt;\n}\n.game {\n    border: 2px so
 /***/ "./src/app/allboardgames/allboardgames.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <textarea rows=\"2\" cols=\"75\" class=\"search\" [(ngModel)]=\"searchText\" placeholder=\"Search for a Game!\"></textarea>\n  <!-- <input type=\"text\" name=\"search\" class=\"search\" [(ngModel)]=\"searchText\" placeholder=\"Search for a Game!\"> -->\n  <br>\n  <h1>Welcome {{user_info?.first_name}}</h1>\n  <!-- <div [ngStyle]=\"{\n        'background-color': 'grey'}\"> -->\n  <div class=\"game row mb-3\" *ngFor=\"let games of allGames | filter:'title':searchText\">\n    <div class=\"col-9\">\n      <h2>{{games.title}}</h2>\n      <p>{{games.description}}</p>\n      <p>Condition: {{games.condition}}</p>\n    </div>\n    <div class=\"col-3\">\n      <h2>${{games.price}}</h2>\n      <p>{{games.location}}</p>\n      <button *ngIf=\"(games._user) === (session)\" class=\"btn btn-danger\" (click)=\"deleteGame(games._id)\">Delete</button> \n      <button *ngIf=\"(games._user) == (session)\" class=\"btn btn-info\" [routerLink]=\"['/edit']\">Edit Listing</button>\n      <button *ngIf=\"(games._user) != (session)\" class=\"btn btn-info\">Contect Seller</button>\n      <!-- <p-dialog header=\"Title\" [(visible)]=\"display\" *ngIf=\"games._user != session\">\n            <!-- <button type=\"button\" class=\"btn btn-primary\" >Placeholder</button> -->\n      <!-- <button type=\"text\" (click)=\"showDialog()\" pButton icon=\"fa-external-link-square\" label=\"Show\"></button> -->\n      <!-- </p-dialog> -->\n    </div>\n  </div>\n</div>"
+module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <textarea rows=\"2\" cols=\"75\" class=\"search\" [(ngModel)]=\"searchText\" placeholder=\"Search for a Game!\"></textarea>\n  <br>\n  <h1>Welcome {{user_info?.first_name}}</h1>\n  <div class=\"game row mb-3\" *ngFor=\"let games of allGames | filter:'title':searchText\">\n    <div class=\"col-9\">\n      <h2>{{games.title}}</h2>\n      <p>{{games.description}}</p>\n      <p>Condition: {{games.condition}}</p>\n    </div>\n    <div class=\"col-3\">\n      <h2>${{games.price}}</h2>\n      <p>{{games.location}}</p>\n      <!-- <div class=\"buttons row\"> -->\n        <!-- <div class=\"col-6\"> -->\n          <button *ngIf=\"(games._user) === (session)\" class=\"btn btn-danger\" (click)=\"deleteGame(games._id)\">Delete</button> \n          <button *ngIf=\"(games._user) == (session)\" class=\"btn btn-info\" routerLink='/edit/{{games._id}}'>Edit Listing</button>\n          <button *ngIf=\"(games._user) != (session)\" class=\"btn btn-info\">Contect Seller</button>\n        <!-- </div> -->\n      <!-- </div> -->\n\n      <!-- <p-dialog header=\"Title\" [(visible)]=\"display\" *ngIf=\"games._user != session\">\n            <!-- <button type=\"button\" class=\"btn btn-primary\" >Placeholder</button> -->\n      <!-- <button type=\"text\" (click)=\"showDialog()\" pButton icon=\"fa-external-link-square\" label=\"Show\"></button> -->\n      <!-- </p-dialog> -->\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -54,7 +54,6 @@ var AllboardgamesComponent = /** @class */ (function () {
         this._httpService = _httpService;
         this._router = _router;
     }
-    // display: boolean = false;
     AllboardgamesComponent.prototype.ngOnInit = function () {
         this.getGames();
         this.checkSessionUserComponent();
@@ -63,37 +62,27 @@ var AllboardgamesComponent = /** @class */ (function () {
         var _this = this;
         var session_data = this._httpService.checkSessionUser();
         session_data.subscribe(function (data) {
-            console.log(data, "this is data!");
-            console.log(data["session"]);
             if (data["session"] == false) {
                 console.log("got here!");
                 _this._router.navigateByUrl("/");
             }
             else {
-                console.log("got here to give user data!");
                 _this.user_info = data["user"];
                 _this.session = data["session"];
-                console.log(_this.user_info);
             }
         });
     };
     AllboardgamesComponent.prototype.getGames = function () {
         var _this = this;
         var allGames = this._httpService.getAllGames().subscribe(function (data) {
-            console.log(data, "all the data!");
             _this.allGames = data["games"];
-            console.log(_this.allGames);
         });
     };
     AllboardgamesComponent.prototype.deleteGame = function (id) {
         var _this = this;
         var deleteGame = this._httpService.deleteGame(id).subscribe(function (data) {
-            console.log("able to get here!");
             _this.getGames();
         });
-    };
-    AllboardgamesComponent.prototype.buttonTest = function () {
-        console.log("are you there god its me margaret");
     };
     AllboardgamesComponent = __decorate([
         core_1.Component({
@@ -131,8 +120,8 @@ var edit_boardgames_component_1 = __webpack_require__("./src/app/edit-boardgames
 var routes = [
     { path: '', component: home_component_1.HomeComponent },
     { path: "createboardgame", component: create_boardgame_component_1.CreateBoardgameComponent },
-    { path: "edit", component: edit_boardgames_component_1.EditBoardgamesComponent },
     { path: "dashboard", component: user_dashboard_component_1.UserDashboardComponent },
+    { path: "edit/:id", component: edit_boardgames_component_1.EditBoardgamesComponent },
     { path: "", pathMatch: 'full', redirectTo: '/' }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -273,7 +262,7 @@ module.exports = ".error {\n    color: red;\n}\n\n.right {\n    /* padding-left:
 /***/ "./src/app/create-boardgame/create-boardgame.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<br><br>\n<div class=\"container\">\n  <div class=\"col creategame\">\n    <form #createbgform=\"ngForm\" (submit) = createNewBoardgame()>\n      <p>Title</p>\n      <input type=\"text\" \n      name=\"title\" \n      required\n      [(ngModel)]=\"BoardGameCreate.title\"\n      #title=\"ngModel\"\n      />\n      <div class=\"error\" *ngIf=\"!title.valid && (title.touched)\">Title is required!</div>  \n      <br><br>\n      <p><textarea rows=\"4\" cols=\"50\" \n      name=\"description\" \n      required\n      maxlength=\"200\"\n      [(ngModel)]=\"BoardGameCreate.description\"\n      #description =\"ngModel\"></textarea></p>\n      <div class=\"error\" *ngIf=\"!description.valid && (description.touched)\">Description is required!</div>\n      <p>Price</p>\n      <input type=\"number\"\n      name=\"price\"\n      required\n      [(ngModel)]=\"BoardGameCreate.price\"\n      #price =\"ngModel\"/>\n      <div class=\"error\" *ngIf=\"!price.valid && (price.touched)\">Price is required!</div> \n      <br><br>\n      <p>Location</p> \n      <p><input type=\"text\"\n      name=\"location\"\n      required\n      [(ngModel)]=\"BoardGameCreate.location\"\n      #location=\"ngModel\"/></p>\n      <div class=\"error\" *ngIf=\"!location.valid && (location.touched)\">Location is required!</div>\n      <p>Condition</p>\n      <p><select\n        name=\"BoardGameCreate.condition\"\n        [(ngModel)]=\"BoardGameCreate.condition\">\n          <option value=\"Used\">Used</option>\n          <option value=\"Like New\">Like New</option>\n          <option value=\"New\">New</option>\n      </select>\n      </p>\n      <input type=\"submit\"[disabled]=\"!createbgform.form.valid\">  \n    </form>\n\n  </div>\n</div>"
+module.exports = "<app-navbar></app-navbar>\n<br><br>\n<div class=\"container\">\n  <div class=\"col creategame\">\n    <form #createbgform=\"ngForm\" (submit) = createNewBoardgame()>\n      <p>Title</p>\n      <input type=\"text\" \n      name=\"title\" \n      required\n      [(ngModel)]=\"BoardGameCreate.title\"\n      #title=\"ngModel\"\n      />\n      <div class=\"error\" *ngIf=\"!title.valid && (title.touched)\">Title is required!</div>  \n      <br><br>\n      <p><textarea rows=\"4\" cols=\"50\" \n      name=\"description\" \n      required\n      maxlength=\"200\"\n      [(ngModel)]=\"BoardGameCreate.description\"\n      #description =\"ngModel\"></textarea></p>\n      <div class=\"error\" *ngIf=\"!description.valid && (description.touched)\">Description is required!</div>\n      <p>Price</p>\n      <input type=\"number\"\n      name=\"price\"\n      required\n      [(ngModel)]=\"BoardGameCreate.price\"\n      #price =\"ngModel\"/>\n      <div class=\"error\" *ngIf=\"!price.valid && (price.touched)\">Price is required!</div> \n      <br><br>\n      <p>Location</p> \n      <p><input type=\"text\"\n      name=\"location\"\n      required\n      [(ngModel)]=\"BoardGameCreate.location\"\n      #location=\"ngModel\"/></p>\n      <div class=\"error\" *ngIf=\"!location.valid && (location.touched)\">Location is required!</div>\n      <p>Condition</p>\n      <p><select\n        name=\"BoardGameCreate.condition\"\n        [(ngModel)]=\"BoardGameCreate.condition\">\n          <option value=\"Used\">Used</option>\n          <option value=\"Like New\">Like New</option>\n          <option value=\"New\">New</option>\n      </select>\n      </p>\n      <input type=\"submit\"[disabled]=\"!createbgform.form.valid\">  \n    </form>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -353,14 +342,14 @@ exports.CreateBoardgameComponent = CreateBoardgameComponent;
 /***/ "./src/app/edit-boardgames/edit-boardgames.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".error \n{\n    color: red;\n}\n.gameform \n{\n    border: 1px;\n}\n"
 
 /***/ }),
 
 /***/ "./src/app/edit-boardgames/edit-boardgames.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <h2>Do you work???</h2>\n</div>\n\n"
+module.exports = "<app-navbar></app-navbar>\n<br><br><br>\n<div class=\"container my-5\">\n  <div class=\"row\">\n    <div class=\"col-8 editgame\">\n      <div *ngIf=\"game\">\n          <form #editbgform=\"ngForm\" (submit)=editBoardgame()>\n            <p>Title</p>\n            <input name=\"title\" required [(ngModel)]=\"game.title\" #title=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!title.valid && (title.touched)\">Title is required!</div>\n            <p>Description</p>\n              <textarea rows=\"4\" cols=\"50\" name=\"description\" required maxlength=\"200\" [(ngModel)]=\"game.description\" #description=\"ngModel\"></textarea>\n            <div class=\"error\" *ngIf=\"!description.valid && (description.touched)\">Description is required!</div>\n            <p>Price</p>\n            <input type=\"number\" name=\"price\" required [(ngModel)]=\"game.price\" #price=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!price.valid && (price.touched)\">Price is required!</div>\n            <p>Location</p>\n              <input type=\"text\" name=\"location\" required [(ngModel)]=\"game.location\" #location=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!location.valid && (location.touched)\">Location is required!</div>\n            <p>Condition</p>\n              <select name=\"game.condition\" [(ngModel)]=\"game.condition\">\n                <option value=\"Used\">Used</option>\n                <option value=\"Like New\">Like New</option>\n                <option value=\"New\">New</option>\n              </select>\n              <br><br>\n            <p><input type=\"submit\" [disabled]=\"!editbgform.form.valid\"></p>\n          </form>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -380,10 +369,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+var http_service_1 = __webpack_require__("./src/app/http.service.ts");
 var EditBoardgamesComponent = /** @class */ (function () {
-    function EditBoardgamesComponent() {
+    function EditBoardgamesComponent(_httpService, _route) {
+        this._httpService = _httpService;
+        this._route = _route;
     }
     EditBoardgamesComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        // this._route.paramMap.subscribe((paramMap: Params) => {
+        //   console.log(paramMap, "params in edit")
+        //   this.game_id = paramMap['id']
+        //   console.log(this.game_id, "game id!")
+        // })
+        this._route.params.subscribe(function (params) {
+            _this.game_id = params['id'];
+            console.log(_this.game_id);
+        });
+        this.getGame();
+    };
+    EditBoardgamesComponent.prototype.getGame = function () {
+        var _this = this;
+        var chosenGame = this._httpService.getGame(this.game_id).subscribe(function (data) {
+            _this.game = data["game"];
+        });
+    };
+    EditBoardgamesComponent.prototype.editBoardgame = function (game) {
+        var edited_game = this._httpService.editGame(this.game)
+            .subscribe(function (edited_game) {
+            console.log(edited_game);
+        });
+        // this.getGame()
     };
     EditBoardgamesComponent = __decorate([
         core_1.Component({
@@ -391,7 +408,8 @@ var EditBoardgamesComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/edit-boardgames/edit-boardgames.component.html"),
             styles: [__webpack_require__("./src/app/edit-boardgames/edit-boardgames.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [http_service_1.HttpService,
+            router_1.ActivatedRoute])
     ], EditBoardgamesComponent);
     return EditBoardgamesComponent;
 }());
@@ -504,10 +522,7 @@ var HomeComponent = /** @class */ (function () {
         var newUser = this._httpService.createNewUser(this.UserReg);
         newUser.subscribe(function (data) {
             console.log(data, "Got user!");
-            // console.log(data['errors']['birthday']['message'])
-            // this.errors = data["errors"];
             if (data["err"]) {
-                // this.errors = data["errors"]
                 _this.RegError = data['err'];
                 _this._router.navigateByUrl("/");
             }
@@ -581,36 +596,36 @@ var HttpService = /** @class */ (function () {
         this._http = _http;
     }
     HttpService.prototype.createNewUser = function (UserReg) {
-        console.log(UserReg);
         return this._http.post('createnewuser', UserReg);
     };
     HttpService.prototype.loginUser = function (UserLog) {
-        console.log(UserLog);
         return this._http.post('loginuser', UserLog);
     };
     HttpService.prototype.checkSessionUser = function () {
-        console.log("in session check service!");
         return this._http.get('check_session');
     };
     HttpService.prototype.userLogout = function () {
-        console.log("here from nav bar!");
         return this._http.get('logout');
     };
     HttpService.prototype.createBoardGame = function (BoardGameCreate) {
-        console.log("here from component!", BoardGameCreate);
         return this._http.post('creategame', BoardGameCreate);
     };
     HttpService.prototype.getAllGames = function () {
-        console.log("here in your base at 39!");
         return this._http.get('findgames');
     };
     HttpService.prototype.deleteGame = function (id) {
-        console.log("here in delete!", id);
         return this._http.get('/delete/' + id);
     };
     HttpService.prototype.randomGame = function () {
-        console.log("got here in randomgame");
         return this._http.get('random');
+    };
+    HttpService.prototype.getGame = function (id) {
+        return this._http.get('/get_game/' + id);
+    };
+    HttpService.prototype.editGame = function (game) {
+        console.log("here in editted game!");
+        console.log(game.id);
+        return this._http.post('/edit_game', game);
     };
     HttpService = __decorate([
         core_1.Injectable(),
@@ -633,7 +648,7 @@ module.exports = ""
 /***/ "./src/app/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid mt-5 position-fixed p-0\">\n  <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n          <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item active\">\n            <a class=\"nav-link\" [routerLink]=\"['/dashboard']\">Home <span class=\"sr-only\">(current)</span></a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/createboardgame']\">Create New Listing</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/myboardgames']\">My Listings</a>\n          </li>\n        </ul>\n        <form class=\"form-inline my-2 my-lg-0\">\n          <button class=\"btn btn-outline-success my-2 my-sm-0\" (click) = userLogout()>Logout</button>\n        </form>\n      </div>\n    </nav>\n\n</div>\n<router-outlet></router-outlet>"
+module.exports = "<div class=\"container-fluid mt-5 position-fixed p-0\">\n  <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n          <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item active\">\n            <a class=\"nav-link\" [routerLink]=\"['/dashboard']\">Home <span class=\"sr-only\">(current)</span></a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/createboardgame']\">Create New Listing</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/myboardgames']\">My Listings</a>\n          </li>\n        </ul>\n        <form class=\"form-inline my-2 my-lg-0\">\n          <button class =\"btn btn-primary mr-4\" (click)= \"goBack()\">Go Back</button>\n          <button class=\"btn btn-outline-success my-2 my-sm-0\" (click) = userLogout()>Logout</button>\n        </form>\n      </div>\n    </nav>\n</div>"
 
 /***/ }),
 
@@ -655,10 +670,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var http_service_1 = __webpack_require__("./src/app/http.service.ts");
 var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+var common_1 = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
 var NavbarComponent = /** @class */ (function () {
-    function NavbarComponent(_httpService, _router) {
+    function NavbarComponent(_httpService, _router, location) {
         this._httpService = _httpService;
         this._router = _router;
+        this.location = location;
     }
     NavbarComponent.prototype.ngOnInit = function () {
     };
@@ -667,13 +684,18 @@ var NavbarComponent = /** @class */ (function () {
         observable.subscribe(function (data) { return console.log(data, "this is data!"); });
         this._router.navigateByUrl("/");
     };
+    NavbarComponent.prototype.goBack = function () {
+        this.location.back();
+    };
     NavbarComponent = __decorate([
         core_1.Component({
             selector: 'app-navbar',
             template: __webpack_require__("./src/app/navbar/navbar.component.html"),
             styles: [__webpack_require__("./src/app/navbar/navbar.component.css")]
         }),
-        __metadata("design:paramtypes", [http_service_1.HttpService, router_1.Router])
+        __metadata("design:paramtypes", [http_service_1.HttpService,
+            router_1.Router,
+            common_1.Location])
     ], NavbarComponent);
     return NavbarComponent;
 }());

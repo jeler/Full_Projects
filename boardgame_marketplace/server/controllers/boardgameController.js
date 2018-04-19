@@ -31,66 +31,74 @@ class BoardGameController {
 
     findgames(req, res) {
         BoardGame.find({})
-        .populate('User')
-        .exec(function (err, games) {
+            .populate('User')
+            .exec(function (err, games) {
+                if (err) {
+                    res.json({ message: "frowny face" })
+                }
+                else {
+                    console.log(games, "this is games at line 47!")
+                    res.json({ games })
+                }
+            })
+    }
+
+    delete(req, res) {
+        BoardGame.findOneAndRemove({ _id: req.params.id }, function (err, boardgame) {
             if (err) {
-                res.json({ message: "frowny face" })
+                console.log(err)
             }
             else {
-                console.log(games, "this is games at line 47!")
-                res.json({ games })
-            }
-        })
-    }
-
-    delete(req, res)
-    {
-        BoardGame.findOneAndRemove({_id: req.params.id}, function(err, boardgame)
-        {
-            if(err)
-            {
-                console.log(err)
-            }
-            else
-            {
                 User.update
-                (
-                    {$pull: {"boardgames": req.params.id} },
-                    function(err, response)
-                    {
-                        if(err) throw err;
-                        res.json({response});  
+                    (
+                    { $pull: { "boardgames": req.params.id } },
+                    function (err, response) {
+                        if (err) throw err;
+                        res.json({ response });
                     }
-                )
+                    )
             }
         })
     }
-    random(req, res)
-    {
-        BoardGame.count().exec(function(err, count)
-        {
-            if(err)
-            {
+    random(req, res) {
+        BoardGame.count().exec(function (err, count) {
+            if (err) {
                 console.log(err)
             }
-            else{
+            else {
 
-                var random = Math.floor(Math.random() * count)    
+                var random = Math.floor(Math.random() * count)
             }
             BoardGame.findOne().skip(random).exec(
-                function(err, result)
-                {
-                    if (err)
-                    {
+                function (err, result) {
+                    if (err) {
                         console.log(err)
                     }
-                    else
-                    {
-                        res.json({result})
+                    else {
+                        res.json({ result })
                     }
                 }
             )
         })
+    }
+
+    get_game(req, res) {
+        BoardGame.findOne({ _id: req.params.id }, function (err, game) {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                res.json({ game })
+            }
+        }
+
+        )
+    }
+
+    edit_game (req, res) {
+        // BoardGame.findOne( {_id: game. }
+        // )
+        console.log(game._id)
     }
 }
 

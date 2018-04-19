@@ -42,11 +42,8 @@ export class HomeComponent implements OnInit {
       let newUser = this._httpService.createNewUser(this.UserReg);
       newUser.subscribe(data => {
         console.log(data,"Got user!")
-        // console.log(data['errors']['birthday']['message'])
-        // this.errors = data["errors"];
         if(data["err"])
         {
-          // this.errors = data["errors"]
           this.RegError = data['err'];
           this._router.navigateByUrl("/")
         }
