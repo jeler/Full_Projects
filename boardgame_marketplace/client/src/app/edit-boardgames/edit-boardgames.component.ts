@@ -38,7 +38,7 @@ export class EditBoardgamesComponent implements OnInit {
     this.getGame()
   }
 
-  getGame() {
+  getGame(): void {
     let chosenGame = this._httpService.getGame(this.game_id).subscribe(data => {
       this.game = data["game"]
     })

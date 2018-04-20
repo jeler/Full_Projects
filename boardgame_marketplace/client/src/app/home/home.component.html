@@ -1,9 +1,9 @@
 <div class="container-fluid">
 <br><br>
     <div class="row justify-content-center">
-        <h2 class="bgoftheday">Boardgame of the day!</h2>
+        <h2 class="bgoftheday">Popular Board Games!</h2>
     </div>
-    <div class="row justify-content-center">
+    <!-- <div class="row justify-content-center">
         <div class="randomGame col-8" >
             <div class="row justify-content-between">
                 <div class="col-9">
@@ -14,6 +14,16 @@
                 <div class="col-4-sm">
                     <h2>${{random?.price}}</h2>
                     <p>{{random?.location}}</p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col" *ngFor="let game of games">
+            <div *ngIf="game.rank < 5">
+                <div class="badge">
+                    {{game?.rank}} {{game?.name}} 
+                    <p><img class="game_pic" src="{{game.thumbnail}}"></p>
                 </div>
             </div>
         </div>

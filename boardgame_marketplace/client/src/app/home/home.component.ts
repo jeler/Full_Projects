@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
+import { SlicePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   PwError;
   Lockout;
   random: any;
+  games: any;
 
   ngOnInit()
   {
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
       password: ""
     }
     this.getrandomGame();
+    this.retrievepopularGame();
   }
     onSubmit(UserReg)
     {
@@ -85,6 +87,15 @@ export class HomeComponent implements OnInit {
         console.log("this is data", data)
         this.random = data["result"]
         console.log(this.random);
+      })
+    }
+    retrievepopularGame(): void
+    {
+      let game_list = this._httpService.retrievePopularGames()
+      game_list.subscribe(games => {
+        console.log("this is data from bcg!", games)
+        this.games = games
+        console.log(this.games)
       })
     }
 

@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map'
 import { of } from 'rxjs/observable/of';
+
 
 @Injectable()
 export class HttpService {
 
   constructor(private _http: HttpClient) { }
+
+  private popularBoardgameUrl = 'https://bgg-json.azurewebsites.net/hot';  // URL to web api
 
   createNewUser(UserReg)
   {
@@ -54,5 +58,11 @@ export class HttpService {
     console.log("here in editted game!")
     console.log(game.id)
     return this._http.post('/edit_game', game)
+  }
+
+  retrievePopularGames()
+  {
+    return this._http
+    .get(this.popularBoardgameUrl)
   }
 }
