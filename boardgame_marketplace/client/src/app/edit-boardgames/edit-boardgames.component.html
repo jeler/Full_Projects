@@ -1,6 +1,9 @@
 <div class="container my-4">
   <div class="row">
     <div class="col-8 editgame">
+      <div class="alert alert-success" *ngIf="saveSuccess">
+        <strong>Success! Your Game Has Been Updated!</strong>
+      </div>
       <div *ngIf="game">
           <form #editbgform="ngForm" (submit)=editBoardgame()>
             <p>Title</p>

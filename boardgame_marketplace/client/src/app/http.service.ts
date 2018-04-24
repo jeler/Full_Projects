@@ -56,8 +56,8 @@ export class HttpService {
   editGame(game)
   {
     console.log("here in editted game!")
-    console.log(game.id)
-    return this._http.post('/edit_game', game)
+    console.log(game._id)
+    return this._http.post('/edit_game/' + game._id, game)
   }
 
   retrievePopularGames()

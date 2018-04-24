@@ -22,7 +22,7 @@ function(app)
 
     app.post('/creategame', boardgame.creategame)
 
-    app.post('/edit_game/', boardgame.edit_game)    
+    app.post('/edit_game/:id', boardgame.edit_game)    
 
     app.get('/logout', user.logout)
 

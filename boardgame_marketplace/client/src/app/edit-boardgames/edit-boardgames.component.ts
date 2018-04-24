@@ -14,7 +14,7 @@ export class EditBoardgamesComponent implements OnInit {
     private _httpService: HttpService, 
     private _route: ActivatedRoute
   ) { }
-
+  saveSuccess: boolean;
   game: 
   {
     title: "",
@@ -41,15 +41,25 @@ export class EditBoardgamesComponent implements OnInit {
   getGame(): void {
     let chosenGame = this._httpService.getGame(this.game_id).subscribe(data => {
       this.game = data["game"]
+      console.log(this.game, "this is this.game")
     })
   }
 
   editBoardgame(game): void
   {
+    console.log(this.game, "this is bg in editBoardgame")
     let edited_game = this._httpService.editGame(this.game)
     .subscribe(edited_game => {
       console.log(edited_game)
+      if(edited_game)
+      {
+        this.saveSuccess = true;
+        this.getGame()
+      }
+      else
+      {
+        this.saveSuccess = false;
+      }
     })
-    // this.getGame()
   }
 }

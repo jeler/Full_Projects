@@ -353,7 +353,7 @@ module.exports = ".error \n{\n    color: red;\n}\n.gameform \n{\n    border: 1px
 /***/ "./src/app/edit-boardgames/edit-boardgames.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container my-4\">\n  <div class=\"row\">\n    <div class=\"col-8 editgame\">\n      <div *ngIf=\"game\">\n          <form #editbgform=\"ngForm\" (submit)=editBoardgame()>\n            <p>Title</p>\n            <input name=\"title\" required [(ngModel)]=\"game.title\" #title=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!title.valid && (title.touched)\">Title is required!</div>\n            <p>Description</p>\n              <textarea rows=\"4\" cols=\"50\" name=\"description\" required maxlength=\"200\" [(ngModel)]=\"game.description\" #description=\"ngModel\"></textarea>\n            <div class=\"error\" *ngIf=\"!description.valid && (description.touched)\">Description is required!</div>\n            <p>Price</p>\n            <input type=\"number\" name=\"price\" required [(ngModel)]=\"game.price\" #price=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!price.valid && (price.touched)\">Price is required!</div>\n            <p>Location</p>\n              <input type=\"text\" name=\"location\" required [(ngModel)]=\"game.location\" #location=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!location.valid && (location.touched)\">Location is required!</div>\n            <p>Condition</p>\n              <select name=\"game.condition\" [(ngModel)]=\"game.condition\">\n                <option value=\"Used\">Used</option>\n                <option value=\"Like New\">Like New</option>\n                <option value=\"New\">New</option>\n              </select>\n              <br><br>\n            <p><input type=\"submit\" [disabled]=\"!editbgform.form.valid\"></p>\n          </form>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container my-4\">\n  <div class=\"row\">\n    <div class=\"col-8 editgame\">\n      <div class=\"alert alert-success\" *ngIf=\"saveSuccess\">\n        <strong>Success! Your Game Has Been Updated!</strong>\n      </div>\n      <div *ngIf=\"game\">\n          <form #editbgform=\"ngForm\" (submit)=editBoardgame()>\n            <p>Title</p>\n            <input name=\"title\" required [(ngModel)]=\"game.title\" #title=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!title.valid && (title.touched)\">Title is required!</div>\n            <p>Description</p>\n              <textarea rows=\"4\" cols=\"50\" name=\"description\" required maxlength=\"200\" [(ngModel)]=\"game.description\" #description=\"ngModel\"></textarea>\n            <div class=\"error\" *ngIf=\"!description.valid && (description.touched)\">Description is required!</div>\n            <p>Price</p>\n            <input type=\"number\" name=\"price\" required [(ngModel)]=\"game.price\" #price=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!price.valid && (price.touched)\">Price is required!</div>\n            <p>Location</p>\n              <input type=\"text\" name=\"location\" required [(ngModel)]=\"game.location\" #location=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!location.valid && (location.touched)\">Location is required!</div>\n            <p>Condition</p>\n              <select name=\"game.condition\" [(ngModel)]=\"game.condition\">\n                <option value=\"Used\">Used</option>\n                <option value=\"Like New\">Like New</option>\n                <option value=\"New\">New</option>\n              </select>\n              <br><br>\n            <p><input type=\"submit\" [disabled]=\"!editbgform.form.valid\"></p>\n          </form>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -397,14 +397,23 @@ var EditBoardgamesComponent = /** @class */ (function () {
         var _this = this;
         var chosenGame = this._httpService.getGame(this.game_id).subscribe(function (data) {
             _this.game = data["game"];
+            console.log(_this.game, "this is this.game");
         });
     };
     EditBoardgamesComponent.prototype.editBoardgame = function (game) {
+        var _this = this;
+        console.log(this.game, "this is bg in editBoardgame");
         var edited_game = this._httpService.editGame(this.game)
             .subscribe(function (edited_game) {
             console.log(edited_game);
+            if (edited_game) {
+                _this.saveSuccess = true;
+                _this.getGame();
+            }
+            else {
+                _this.saveSuccess = false;
+            }
         });
-        // this.getGame()
     };
     EditBoardgamesComponent = __decorate([
         core_1.Component({
@@ -626,8 +635,8 @@ var HttpService = /** @class */ (function () {
     };
     HttpService.prototype.editGame = function (game) {
         console.log("here in editted game!");
-        console.log(game.id);
-        return this._http.post('/edit_game', game);
+        console.log(game._id);
+        return this._http.post('/edit_game/' + game._id, game);
     };
     HttpService.prototype.retrievePopularGames = function () {
         return this._http
@@ -650,14 +659,14 @@ exports.HttpService = HttpService;
 /***/ "./src/app/navbar/navbar.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".bgmarketplace \n{\n    color: white;\n    background: #343a40;\n}\n\nh1\n{\n    padding: 0px;\n    margin: 0px;\n}\n"
+module.exports = ".bgmarketplace \n{\n    color: white;\n    background: #343a40;\n}\n\nh1\n{\n    padding: 0px;\n    margin: 0px;\n}\n\n/* body {\n    min-height: 75rem;\n    padding-top: 8rem;\n  } */\n"
 
 /***/ }),
 
 /***/ "./src/app/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n    <h1 class=\"bgmarketplace\">Board Game Marketplace</h1>\n  <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n          <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item active\">\n            <a class=\"nav-link\" [routerLink]=\"['/dashboard']\">Home <span class=\"sr-only\">(current)</span></a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/createboardgame']\">Create New Listing</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/myboardgames']\">My Listings</a>\n          </li>\n        </ul>\n        <form class=\"form-inline my-2 my-lg-0\">\n          <button class =\"btn btn-outline-primary mr-4\" (click)= \"goBack()\">Go Back</button>\n          <button class=\"btn btn-outline-success my-2 my-sm-0\" (click) = userLogout()>Logout</button>\n        </form>\n      </div>\n    </nav>\n</div>"
+module.exports = "  <!-- <div class=\"bgmarketplace fixed-top\"> -->\n  <div class=\"bgmarketplace\">\n    <h1>Board Game Marketplace</h1>\n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\"\n        aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n        <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item active\">\n            <a class=\"nav-link\" [routerLink]=\"['/dashboard']\">Home\n              <span class=\"sr-only\">(current)</span>\n            </a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/createboardgame']\">Create New Listing</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/myboardgames']\">My Listings</a>\n          </li>\n        </ul>\n        <form class=\"form-inline my-2 my-lg-0\">\n          <button class=\"btn btn-outline-primary mr-4\" (click)=\"goBack()\">Go Back</button>\n          <button class=\"btn btn-outline-success my-2 my-sm-0\" (click)= userLogout()>Logout</button>\n        </form>\n      </div>\n    </nav>\n  </div>"
 
 /***/ }),
 

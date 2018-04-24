@@ -96,9 +96,20 @@ class BoardGameController {
     }
 
     edit_game (req, res) {
-        // BoardGame.findOne( {_id: game. }
-        // )
-        console.log(game._id)
+        BoardGame.findByIdAndUpdate(req.params.id, {$set: req.body}, function(err, game)
+        {
+            if(err)
+            {
+                console.log(err)
+            }
+            else
+            {
+                console.log(game, "this is game in controller!")
+                console.log(req.body)
+                res.json({ game })
+            }
+        }
+        )
     }
 }
 
