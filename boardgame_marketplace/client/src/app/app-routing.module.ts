@@ -5,6 +5,7 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { CreateBoardgameComponent } from './create-boardgame/create-boardgame.component';
 import { AllboardgamesComponent } from './allboardgames/allboardgames.component';
 import { EditBoardgamesComponent } from './edit-boardgames/edit-boardgames.component';
+import { PopularGameInfoComponent } from './popular-game-info/popular-game-info.component';
 
  
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: "createboardgame", component: CreateBoardgameComponent},
   {path: "dashboard", component: UserDashboardComponent},
   {path: "edit/:id", component: EditBoardgamesComponent},
+  {path: "popular/:id", component: PopularGameInfoComponent},
   {path: "", pathMatch: 'full', redirectTo: '/'}
 
 ];

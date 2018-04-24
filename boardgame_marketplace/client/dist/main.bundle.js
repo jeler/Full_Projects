@@ -27,7 +27,7 @@ module.exports = ".right {\n    font-size: 16pt;\n}\n.game {\n    border: 2px so
 /***/ "./src/app/allboardgames/allboardgames.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<div class=\"container\">\n  <textarea rows=\"2\" cols=\"75\" class=\"search\" [(ngModel)]=\"searchText\" placeholder=\"Search for a Game!\"></textarea>\n  <br>\n  <h1>Welcome {{user_info?.first_name}}</h1>\n  <div class=\"game row mb-3\" *ngFor=\"let games of allGames | filter:'title':searchText\">\n    <div class=\"col-9\">\n      <h2>{{games.title}}</h2>\n      <p>{{games.description}}</p>\n      <p>Condition: {{games.condition}}</p>\n    </div>\n    <div class=\"col-3\">\n      <h2>${{games.price}}</h2>\n      <p>{{games.location}}</p>\n      <!-- <div class=\"buttons row\"> -->\n        <!-- <div class=\"col-6\"> -->\n          <button *ngIf=\"(games._user) === (session)\" class=\"btn btn-danger\" (click)=\"deleteGame(games._id)\">Delete</button> \n          <button *ngIf=\"(games._user) == (session)\" class=\"btn btn-info\" routerLink='/edit/{{games._id}}'>Edit Listing</button>\n          <button *ngIf=\"(games._user) != (session)\" class=\"btn btn-info\">Contect Seller</button>\n        <!-- </div> -->\n      <!-- </div> -->\n\n      <!-- <p-dialog header=\"Title\" [(visible)]=\"display\" *ngIf=\"games._user != session\">\n            <!-- <button type=\"button\" class=\"btn btn-primary\" >Placeholder</button> -->\n      <!-- <button type=\"text\" (click)=\"showDialog()\" pButton icon=\"fa-external-link-square\" label=\"Show\"></button> -->\n      <!-- </p-dialog> -->\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <textarea rows=\"2\" cols=\"75\" class=\"search\" [(ngModel)]=\"searchText\" placeholder=\"Search for a Game!\"></textarea>\n  <br>\n  <h1>Welcome {{user_info?.first_name}}</h1>\n  <div class=\"game row mb-3\" *ngFor=\"let games of allGames | filter:'title':searchText\">\n    <div class=\"col-9\">\n      <h2>{{games.title}}</h2>\n      <p>{{games.description}}</p>\n      <p>Condition: {{games.condition}}</p>\n    </div>\n    <div class=\"col-3\">\n      <h2>${{games.price}}</h2>\n      <p>{{games.location}}</p>\n      <!-- <div class=\"buttons row\"> -->\n        <!-- <div class=\"col-6\"> -->\n          <button *ngIf=\"(games._user) === (session)\" class=\"btn btn-danger\" (click)=\"deleteGame(games._id)\">Delete</button> \n          <button *ngIf=\"(games._user) == (session)\" class=\"btn btn-info\" routerLink='/edit/{{games._id}}'>Edit Listing</button>\n          <button *ngIf=\"(games._user) != (session)\" class=\"btn btn-info\">Contect Seller</button>\n        <!-- </div> -->\n      <!-- </div> -->\n\n      <!-- <p-dialog header=\"Title\" [(visible)]=\"display\" *ngIf=\"games._user != session\">\n            <!-- <button type=\"button\" class=\"btn btn-primary\" >Placeholder</button> -->\n      <!-- <button type=\"text\" (click)=\"showDialog()\" pButton icon=\"fa-external-link-square\" label=\"Show\"></button> -->\n      <!-- </p-dialog> -->\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -117,11 +117,13 @@ var home_component_1 = __webpack_require__("./src/app/home/home.component.ts");
 var user_dashboard_component_1 = __webpack_require__("./src/app/user-dashboard/user-dashboard.component.ts");
 var create_boardgame_component_1 = __webpack_require__("./src/app/create-boardgame/create-boardgame.component.ts");
 var edit_boardgames_component_1 = __webpack_require__("./src/app/edit-boardgames/edit-boardgames.component.ts");
+var popular_game_info_component_1 = __webpack_require__("./src/app/popular-game-info/popular-game-info.component.ts");
 var routes = [
     { path: '', component: home_component_1.HomeComponent },
     { path: "createboardgame", component: create_boardgame_component_1.CreateBoardgameComponent },
     { path: "dashboard", component: user_dashboard_component_1.UserDashboardComponent },
     { path: "edit/:id", component: edit_boardgames_component_1.EditBoardgamesComponent },
+    { path: "popular/:id", component: popular_game_info_component_1.PopularGameInfoComponent },
     { path: "", pathMatch: 'full', redirectTo: '/' }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -143,14 +145,14 @@ exports.AppRoutingModule = AppRoutingModule;
 /***/ "./src/app/app.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".bgmarketplace \n{\n    color: white;\n    background: #343a40;\n}"
+module.exports = ""
 
 /***/ }),
 
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <div class=\"fixed-top\">\n        <h1 class=\"bgmarketplace\">Board Game Marketplace</h1>\n    </div>\n</div>\n<router-outlet></router-outlet>\n"
+module.exports = "<app-navbar></app-navbar>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -220,6 +222,7 @@ var filter_pipe_1 = __webpack_require__("./src/app/filter.pipe.ts");
 var create_boardgame_component_1 = __webpack_require__("./src/app/create-boardgame/create-boardgame.component.ts");
 var allboardgames_component_1 = __webpack_require__("./src/app/allboardgames/allboardgames.component.ts");
 var edit_boardgames_component_1 = __webpack_require__("./src/app/edit-boardgames/edit-boardgames.component.ts");
+var popular_game_info_component_1 = __webpack_require__("./src/app/popular-game-info/popular-game-info.component.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -233,7 +236,8 @@ var AppModule = /** @class */ (function () {
                 filter_pipe_1.FilterPipe,
                 create_boardgame_component_1.CreateBoardgameComponent,
                 allboardgames_component_1.AllboardgamesComponent,
-                edit_boardgames_component_1.EditBoardgamesComponent
+                edit_boardgames_component_1.EditBoardgamesComponent,
+                popular_game_info_component_1.PopularGameInfoComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -262,7 +266,7 @@ module.exports = ".error {\n    color: red;\n}\n\n.right {\n    /* padding-left:
 /***/ "./src/app/create-boardgame/create-boardgame.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<br><br>\n<div class=\"container\">\n  <div class=\"col creategame\">\n    <form #createbgform=\"ngForm\" (submit) = createNewBoardgame()>\n      <p>Title</p>\n      <input type=\"text\" \n      name=\"title\" \n      required\n      [(ngModel)]=\"BoardGameCreate.title\"\n      #title=\"ngModel\"\n      />\n      <div class=\"error\" *ngIf=\"!title.valid && (title.touched)\">Title is required!</div>  \n      <br><br>\n      <p><textarea rows=\"4\" cols=\"50\" \n      name=\"description\" \n      required\n      maxlength=\"200\"\n      [(ngModel)]=\"BoardGameCreate.description\"\n      #description =\"ngModel\"></textarea></p>\n      <div class=\"error\" *ngIf=\"!description.valid && (description.touched)\">Description is required!</div>\n      <p>Price</p>\n      <input type=\"number\"\n      name=\"price\"\n      required\n      [(ngModel)]=\"BoardGameCreate.price\"\n      #price =\"ngModel\"/>\n      <div class=\"error\" *ngIf=\"!price.valid && (price.touched)\">Price is required!</div> \n      <br><br>\n      <p>Location</p> \n      <p><input type=\"text\"\n      name=\"location\"\n      required\n      [(ngModel)]=\"BoardGameCreate.location\"\n      #location=\"ngModel\"/></p>\n      <div class=\"error\" *ngIf=\"!location.valid && (location.touched)\">Location is required!</div>\n      <p>Condition</p>\n      <p><select\n        name=\"BoardGameCreate.condition\"\n        [(ngModel)]=\"BoardGameCreate.condition\">\n          <option value=\"Used\">Used</option>\n          <option value=\"Like New\">Like New</option>\n          <option value=\"New\">New</option>\n      </select>\n      </p>\n      <input type=\"submit\"[disabled]=\"!createbgform.form.valid\">  \n    </form>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"col creategame\">\n    <form #createbgform=\"ngForm\" (submit) = createNewBoardgame()>\n      <p>Title</p>\n      <input type=\"text\" \n      name=\"title\" \n      required\n      [(ngModel)]=\"BoardGameCreate.title\"\n      #title=\"ngModel\"\n      />\n      <div class=\"error\" *ngIf=\"!title.valid && (title.touched)\">Title is required!</div>  \n      <br><br>\n      <p><textarea rows=\"4\" cols=\"50\" \n      name=\"description\" \n      required\n      maxlength=\"200\"\n      [(ngModel)]=\"BoardGameCreate.description\"\n      #description =\"ngModel\"></textarea></p>\n      <div class=\"error\" *ngIf=\"!description.valid && (description.touched)\">Description is required!</div>\n      <p>Price</p>\n      <input type=\"number\"\n      name=\"price\"\n      required\n      [(ngModel)]=\"BoardGameCreate.price\"\n      #price =\"ngModel\"/>\n      <div class=\"error\" *ngIf=\"!price.valid && (price.touched)\">Price is required!</div> \n      <br><br>\n      <p>Location</p> \n      <p><input type=\"text\"\n      name=\"location\"\n      required\n      [(ngModel)]=\"BoardGameCreate.location\"\n      #location=\"ngModel\"/></p>\n      <div class=\"error\" *ngIf=\"!location.valid && (location.touched)\">Location is required!</div>\n      <p>Condition</p>\n      <p><select\n        name=\"BoardGameCreate.condition\"\n        [(ngModel)]=\"BoardGameCreate.condition\">\n          <option value=\"Used\">Used</option>\n          <option value=\"Like New\">Like New</option>\n          <option value=\"New\">New</option>\n      </select>\n      </p>\n      <input type=\"submit\"[disabled]=\"!createbgform.form.valid\">  \n    </form>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -349,7 +353,7 @@ module.exports = ".error \n{\n    color: red;\n}\n.gameform \n{\n    border: 1px
 /***/ "./src/app/edit-boardgames/edit-boardgames.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<br><br><br>\n<div class=\"container my-5\">\n  <div class=\"row\">\n    <div class=\"col-8 editgame\">\n      <div *ngIf=\"game\">\n          <form #editbgform=\"ngForm\" (submit)=editBoardgame()>\n            <p>Title</p>\n            <input name=\"title\" required [(ngModel)]=\"game.title\" #title=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!title.valid && (title.touched)\">Title is required!</div>\n            <p>Description</p>\n              <textarea rows=\"4\" cols=\"50\" name=\"description\" required maxlength=\"200\" [(ngModel)]=\"game.description\" #description=\"ngModel\"></textarea>\n            <div class=\"error\" *ngIf=\"!description.valid && (description.touched)\">Description is required!</div>\n            <p>Price</p>\n            <input type=\"number\" name=\"price\" required [(ngModel)]=\"game.price\" #price=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!price.valid && (price.touched)\">Price is required!</div>\n            <p>Location</p>\n              <input type=\"text\" name=\"location\" required [(ngModel)]=\"game.location\" #location=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!location.valid && (location.touched)\">Location is required!</div>\n            <p>Condition</p>\n              <select name=\"game.condition\" [(ngModel)]=\"game.condition\">\n                <option value=\"Used\">Used</option>\n                <option value=\"Like New\">Like New</option>\n                <option value=\"New\">New</option>\n              </select>\n              <br><br>\n            <p><input type=\"submit\" [disabled]=\"!editbgform.form.valid\"></p>\n          </form>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container my-4\">\n  <div class=\"row\">\n    <div class=\"col-8 editgame\">\n      <div *ngIf=\"game\">\n          <form #editbgform=\"ngForm\" (submit)=editBoardgame()>\n            <p>Title</p>\n            <input name=\"title\" required [(ngModel)]=\"game.title\" #title=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!title.valid && (title.touched)\">Title is required!</div>\n            <p>Description</p>\n              <textarea rows=\"4\" cols=\"50\" name=\"description\" required maxlength=\"200\" [(ngModel)]=\"game.description\" #description=\"ngModel\"></textarea>\n            <div class=\"error\" *ngIf=\"!description.valid && (description.touched)\">Description is required!</div>\n            <p>Price</p>\n            <input type=\"number\" name=\"price\" required [(ngModel)]=\"game.price\" #price=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!price.valid && (price.touched)\">Price is required!</div>\n            <p>Location</p>\n              <input type=\"text\" name=\"location\" required [(ngModel)]=\"game.location\" #location=\"ngModel\" />\n            <div class=\"error\" *ngIf=\"!location.valid && (location.touched)\">Location is required!</div>\n            <p>Condition</p>\n              <select name=\"game.condition\" [(ngModel)]=\"game.condition\">\n                <option value=\"Used\">Used</option>\n                <option value=\"Like New\">Like New</option>\n                <option value=\"New\">New</option>\n              </select>\n              <br><br>\n            <p><input type=\"submit\" [disabled]=\"!editbgform.form.valid\"></p>\n          </form>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -467,14 +471,14 @@ exports.FilterPipe = FilterPipe;
 /***/ "./src/app/home/home.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".row {\n    margin-right: 0px;\n    margin-left: 0px;\n}\n\n.bgoftheday {\n    color:blue;\n}\n\n.error {\n    color: red;\n}\n\n.randomGame\n{\n    border: 2px solid black;\n    background: lightgrey;\n}\n\n.register\n{\n    border: 2px solid black;    \n}\n\n.login\n{\n    border: 2px solid black;\n\n}\n\n#allcontent {\n    margin-top: 20px;\n}\n\n.badge {\n    display: inline-block;\n    font-size: medium;\n    color: white;\n    padding: 0.8em 0.7em 0 0.7em;\n    background-color: #607D8B;\n    position: relative;\n}\n\n.game_pic\n{\n    -o-object-fit: contain;\n       object-fit: contain;\n}\n"
+module.exports = ".row {\n    margin-right: 0px;\n    margin-left: 0px;\n}\n\n.bgoftheday {\n    color: #343a40;\n}\n\n.error {\n    color: red;\n}\n\n.randomGame\n{\n    border: 2px solid black;\n    background: lightgrey;\n}\n\n.register\n{\n    border: 2px solid black;    \n}\n\n.login\n{\n    border: 2px solid black;\n\n}\n\n#allcontent {\n    margin-top: 20px;\n}\n\n.badge {\n    display: inline-block;\n    font-size: medium;\n    color: white;\n    padding: 0.8em 0.7em 0 0.7em;\n    background: #343a40;    \n    position: relative;\n}\n\n.badge:hover {\n    color: #343a40;\n    background-color: #DDD;\n    left: .1em;\n    cursor: pointer; cursor: hand;\n  }\n"
 
 /***/ }),
 
 /***/ "./src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n<br><br>\n    <div class=\"row justify-content-center\">\n        <h2 class=\"bgoftheday\">Popular Board Games!</h2>\n    </div>\n    <!-- <div class=\"row justify-content-center\">\n        <div class=\"randomGame col-8\" >\n            <div class=\"row justify-content-between\">\n                <div class=\"col-9\">\n                    <h2>{{random?.title}}</h2>\n                    <p>{{random?.description}}</p>\n                    <p>Condition: {{random?.condition}} </p>\n                </div>\n                <div class=\"col-4-sm\">\n                    <h2>${{random?.price}}</h2>\n                    <p>{{random?.location}}</p>\n                </div>\n            </div>\n        </div>\n    </div> -->\n    <div class=\"row\">\n        <div class=\"col\" *ngFor=\"let game of games\">\n            <div *ngIf=\"game.rank < 5\">\n                <div class=\"badge\">\n                    {{game?.rank}} {{game?.name}} \n                    <p><img class=\"game_pic\" src=\"{{game.thumbnail}}\"></p>\n                </div>\n            </div>\n        </div>\n    </div>\n        <br><br>\n    <div class=\"col forms\">\n        <div class= \"row\">\n            <div class=\"col-md-6 justify-content-center\">\n                <div class=\"col-2-sm register\">\n                    <form #registerform=\"ngForm\" (submit) = onSubmit()>\n                        <div class=\"form-group row my-2\">\n                            <label for=\"email_reg\" class=\"col-sm-4 col-form-label text-right\">Email</label>\n                            <div class=\"col-sm-8\">         \n                                <input type=\"text\" \n                                name=\"UserReg.email\" required [(ngModel)]=\"UserReg.email\" #email =\"ngModel\" class=\"col-md-12\"/>\n                                <div class=\"error\"*ngIf=\"!email.valid && email.touched\">Email is not valid!</div> \n                            </div>\n                        </div>\n                        <div class=\"form-group row my-2\">\n                            <label for=\"first_name\" class=\"col-sm-4 col-form-label text-right\">First Name</label>\n                            <div class=\"col-sm-8\"> \n                                <input type=\"text\" name=\"UserReg.first_name\" [(ngModel)]=\"UserReg.first_name\" required minlength=\"2\" #firstname =\"ngModel\" class=\"col-md-12\"/>\n                                <div class=\"error\"*ngIf=\"!firstname.valid && firstname.touched\">First name must contain 2 characters!</div>\n                            </div>                            \n                        </div>\n                        <div class=\"form-group row my-2\">\n                            <label for=\"last_name\" class=\"col-sm-4 col-form-label text-right\">Last Name</label>\n                            <div class=\"col-sm-8\">\n                                <input type=\"text\" name=\"UserReg.last_name\" [(ngModel)]=\"UserReg.last_name\"  required minlength=\"2\" #lastname=\"ngModel\" class=\"col-md-12\"/>\n                                <div class=\"error\"*ngIf=\"!lastname.valid && lastname.touched\">Last name must contain 2 characters!</div>\n                            </div>\n                        </div>   \n                        <div class=\"form-group row my-2\">\n                            <label for=\"password_reg\" class=\"col-sm-4 col-form-label text-right\">Password</label>\n                            <div class=\"col-sm-8\"> \n                                <input type=\"password\" name=\"UserReg.password\" [(ngModel)]=\"UserReg.password\" #passwordreg=\"ngModel\" required minlength=\"8\" class=\"col-md-12\"/>\n                                <div class=\"error\"*ngIf=\"!passwordreg.valid && passwordreg.touched\">Password must contain at least 8 characters!</div>  \n                            </div>   \n                        </div>   \n                        <div class=\"form-group row my-2\">\n                            <label for=\"pw_confirm\" class=\"col-sm-4 col-form-label text-right\">Password Confirmation</label>\n                            <div class=\"col-sm-8\"> \n                                <input type=\"password\" name=\"UserReg.password_confirm\" [(ngModel)]=\"UserReg.password_confirm\" class=\"col-md-12\" #passwordconfirm=\"ngModel\"/>\n                                <div class=\"error\" *ngIf=\"UserReg.password != UserReg.password_confirm\">Passwords do not match!</div>\n                            </div>\n                        </div>\n                        <div class=\"row justify-content-end my-2\">\n                            <div class=\"col-sm-3 mr-3\">\n                                <input type=\"submit\"[disabled]=\"!registerform.form.valid\" class=\"btn btn-success\" value=\"Register\">\n                            </div>\n                        </div>\n                    </form>\n                </div>\n            </div>\n            <div class=\"col-md-6 justify-content-center\"> \n                <div class=\"col-2-sm login\">     \n                    <form #loginform = \"ngForm\" (submit) = onLogin()>\n                        <div class=\"form-group row my-2\"> \n                            <label for=\"email_reg\" class=\"col-sm-4 col-form-label text-right\">Email</label>\n                            <div class=\"col-sm-8\">                   \n                                <input type=\"email\" name=\"UserLog.email\" [(ngModel)]=\"UserLog.email\" required #logemail=\"ngModel\" class=\"col-md-12\">\n                                <div class=\"error\"*ngIf=\"!logemail.valid && logemail.touched\">You need to enter an email!</div>\n                                <div class=\"error\" *ngIf=\"LogError\">{{LogError}}</div>\n                            </div>\n                        </div>     \n                        <div class=\"form-group row my-2\"> \n                            <label for=\"password_reg\" class=\"col-sm-4 col-form-label text-right\">Password</label>\n                            <div class=\"col-sm-8\"> \n                                <input type=\"password\" name=\"UserLog.password\" [(ngModel)]=\"UserLog.password\" #passwordlog=\"ngModel\"required class=\"col-md-12\">\n                                <div class=\"error\" *ngIf=\"!passwordlog.valid &&passwordlog.touched\">You need to enter a password!</div>\n                                <div class=\"error\" *ngIf=\"PwError\">{{PwError}}</div>\n                            </div>\n                        </div>\n                        <div class=\"row justify-content-end my-2\">\n                            <div class=\"col-sm-3 mr-3\">\n                                <input class=\"btn btn-primary\" type=\"submit\" [disabled] =\"!loginform.form.valid\" value=\"Login\">\n                            </div>\n                        </div>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n<br><br>\n    <div class=\"row justify-content-center\">\n        <h2 class=\"bgoftheday\">Popular Board Games!</h2>\n    </div>\n    <div class=\"row\">\n        <div class=\"col\" *ngFor=\"let game of games\">\n            <div *ngIf=\"game.rank < 5\">\n                <a routerLink=\"/popular/{{game.gameId}}\">\n                    <div class=\"badge\">\n                        {{game?.rank}}. {{game?.name}} \n                        <p><img class=\"game_pic\" src=\"{{game.thumbnail}}\"></p>\n                        <p>Published: {{game?.yearPublished}}</p>\n                    </div>\n                </a>\n            </div>\n        </div>\n    </div>\n        <br><br>\n    <div class=\"col forms\">\n        <div class= \"row\">\n            <div class=\"col-md-6 justify-content-center\">\n                <div class=\"col-2-sm register\">\n                    <form #registerform=\"ngForm\" (submit) = onSubmit()>\n                        <div class=\"form-group row my-2\">\n                            <label for=\"email_reg\" class=\"col-sm-4 col-form-label text-right\">Email</label>\n                            <div class=\"col-sm-8\">         \n                                <input type=\"text\" \n                                name=\"UserReg.email\" required [(ngModel)]=\"UserReg.email\" #email =\"ngModel\" class=\"col-md-12\"/>\n                                <div class=\"error\"*ngIf=\"!email.valid && email.touched\">Email is not valid!</div> \n                            </div>\n                        </div>\n                        <div class=\"form-group row my-2\">\n                            <label for=\"first_name\" class=\"col-sm-4 col-form-label text-right\">First Name</label>\n                            <div class=\"col-sm-8\"> \n                                <input type=\"text\" name=\"UserReg.first_name\" [(ngModel)]=\"UserReg.first_name\" required minlength=\"2\" #firstname =\"ngModel\" class=\"col-md-12\"/>\n                                <div class=\"error\"*ngIf=\"!firstname.valid && firstname.touched\">First name must contain 2 characters!</div>\n                            </div>                            \n                        </div>\n                        <div class=\"form-group row my-2\">\n                            <label for=\"last_name\" class=\"col-sm-4 col-form-label text-right\">Last Name</label>\n                            <div class=\"col-sm-8\">\n                                <input type=\"text\" name=\"UserReg.last_name\" [(ngModel)]=\"UserReg.last_name\"  required minlength=\"2\" #lastname=\"ngModel\" class=\"col-md-12\"/>\n                                <div class=\"error\"*ngIf=\"!lastname.valid && lastname.touched\">Last name must contain 2 characters!</div>\n                            </div>\n                        </div>   \n                        <div class=\"form-group row my-2\">\n                            <label for=\"password_reg\" class=\"col-sm-4 col-form-label text-right\">Password</label>\n                            <div class=\"col-sm-8\"> \n                                <input type=\"password\" name=\"UserReg.password\" [(ngModel)]=\"UserReg.password\" #passwordreg=\"ngModel\" required minlength=\"8\" class=\"col-md-12\"/>\n                                <div class=\"error\"*ngIf=\"!passwordreg.valid && passwordreg.touched\">Password must contain at least 8 characters!</div>  \n                            </div>   \n                        </div>   \n                        <div class=\"form-group row my-2\">\n                            <label for=\"pw_confirm\" class=\"col-sm-4 col-form-label text-right\">Password Confirmation</label>\n                            <div class=\"col-sm-8\"> \n                                <input type=\"password\" name=\"UserReg.password_confirm\" [(ngModel)]=\"UserReg.password_confirm\" class=\"col-md-12\" #passwordconfirm=\"ngModel\"/>\n                                <div class=\"error\" *ngIf=\"UserReg.password != UserReg.password_confirm\">Passwords do not match!</div>\n                            </div>\n                        </div>\n                        <div class=\"row justify-content-end my-2\">\n                            <div class=\"col-sm-3 mr-3\">\n                                <input type=\"submit\"[disabled]=\"!registerform.form.valid\" class=\"btn btn-success\" value=\"Register\">\n                            </div>\n                        </div>\n                    </form>\n                </div>\n            </div>\n            <div class=\"col-md-6 justify-content-center\"> \n                <div class=\"col-2-sm login\">     \n                    <form #loginform = \"ngForm\" (submit) = onLogin()>\n                        <div class=\"form-group row my-2\"> \n                            <label for=\"email_reg\" class=\"col-sm-4 col-form-label text-right\">Email</label>\n                            <div class=\"col-sm-8\">                   \n                                <input type=\"email\" name=\"UserLog.email\" [(ngModel)]=\"UserLog.email\" required #logemail=\"ngModel\" class=\"col-md-12\">\n                                <div class=\"error\"*ngIf=\"!logemail.valid && logemail.touched\">You need to enter an email!</div>\n                                <div class=\"error\" *ngIf=\"LogError\">{{LogError}}</div>\n                            </div>\n                        </div>     \n                        <div class=\"form-group row my-2\"> \n                            <label for=\"password_reg\" class=\"col-sm-4 col-form-label text-right\">Password</label>\n                            <div class=\"col-sm-8\"> \n                                <input type=\"password\" name=\"UserLog.password\" [(ngModel)]=\"UserLog.password\" #passwordlog=\"ngModel\"required class=\"col-md-12\">\n                                <div class=\"error\" *ngIf=\"!passwordlog.valid &&passwordlog.touched\">You need to enter a password!</div>\n                                <div class=\"error\" *ngIf=\"PwError\">{{PwError}}</div>\n                            </div>\n                        </div>\n                        <div class=\"row justify-content-end my-2\">\n                            <div class=\"col-sm-3 mr-3\">\n                                <input class=\"btn btn-primary\" type=\"submit\" [disabled] =\"!loginform.form.valid\" value=\"Login\">\n                            </div>\n                        </div>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
 
 /***/ }),
 
@@ -515,14 +519,12 @@ var HomeComponent = /** @class */ (function () {
                 email: "",
                 password: ""
             };
-        this.getrandomGame();
         this.retrievepopularGame();
     };
     HomeComponent.prototype.onSubmit = function (UserReg) {
         var _this = this;
         var newUser = this._httpService.createNewUser(this.UserReg);
         newUser.subscribe(function (data) {
-            console.log(data, "Got user!");
             if (data["err"]) {
                 _this.RegError = data['err'];
                 _this._router.navigateByUrl("/");
@@ -536,7 +538,6 @@ var HomeComponent = /** @class */ (function () {
         var _this = this;
         var User = this._httpService.loginUser(this.UserLog);
         User.subscribe(function (data) {
-            console.log(data);
             if (data["err"] || data["pw_error"] || data["lockout"]) {
                 _this.LogError = data["err"];
                 _this.PwError = data["pw_error"];
@@ -551,22 +552,11 @@ var HomeComponent = /** @class */ (function () {
             }
         });
     };
-    HomeComponent.prototype.getrandomGame = function () {
-        var _this = this;
-        var random = this._httpService.randomGame();
-        random.subscribe(function (data) {
-            console.log("this is data", data);
-            _this.random = data["result"];
-            console.log(_this.random);
-        });
-    };
     HomeComponent.prototype.retrievepopularGame = function () {
         var _this = this;
         var game_list = this._httpService.retrievePopularGames();
         game_list.subscribe(function (games) {
-            console.log("this is data from bcg!", games);
             _this.games = games;
-            console.log(_this.games);
         });
     };
     HomeComponent = __decorate([
@@ -643,6 +633,9 @@ var HttpService = /** @class */ (function () {
         return this._http
             .get(this.popularBoardgameUrl);
     };
+    HttpService.prototype.retrieveIndividualGame = function (id) {
+        return this._http.get('https://bgg-json.azurewebsites.net/thing/' + id);
+    };
     HttpService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.HttpClient])
@@ -657,14 +650,14 @@ exports.HttpService = HttpService;
 /***/ "./src/app/navbar/navbar.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".bgmarketplace \n{\n    color: white;\n    background: #343a40;\n}\n\nh1\n{\n    padding: 0px;\n    margin: 0px;\n}\n"
 
 /***/ }),
 
 /***/ "./src/app/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid mt-5 position-fixed p-0\">\n  <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n          <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item active\">\n            <a class=\"nav-link\" [routerLink]=\"['/dashboard']\">Home <span class=\"sr-only\">(current)</span></a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/createboardgame']\">Create New Listing</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/myboardgames']\">My Listings</a>\n          </li>\n        </ul>\n        <form class=\"form-inline my-2 my-lg-0\">\n          <button class =\"btn btn-primary mr-4\" (click)= \"goBack()\">Go Back</button>\n          <button class=\"btn btn-outline-success my-2 my-sm-0\" (click) = userLogout()>Logout</button>\n        </form>\n      </div>\n    </nav>\n</div>"
+module.exports = "<div class=\"container-fluid\">\n    <h1 class=\"bgmarketplace\">Board Game Marketplace</h1>\n  <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n      <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n          <span class=\"navbar-toggler-icon\"></span>\n      </button>\n      <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n        <ul class=\"navbar-nav mr-auto\">\n          <li class=\"nav-item active\">\n            <a class=\"nav-link\" [routerLink]=\"['/dashboard']\">Home <span class=\"sr-only\">(current)</span></a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/createboardgame']\">Create New Listing</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link\" [routerLink]=\"['/myboardgames']\">My Listings</a>\n          </li>\n        </ul>\n        <form class=\"form-inline my-2 my-lg-0\">\n          <button class =\"btn btn-outline-primary mr-4\" (click)= \"goBack()\">Go Back</button>\n          <button class=\"btn btn-outline-success my-2 my-sm-0\" (click) = userLogout()>Logout</button>\n        </form>\n      </div>\n    </nav>\n</div>"
 
 /***/ }),
 
@@ -716,6 +709,74 @@ var NavbarComponent = /** @class */ (function () {
     return NavbarComponent;
 }());
 exports.NavbarComponent = NavbarComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/popular-game-info/popular-game-info.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/popular-game-info/popular-game-info.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <span class=\"game_info\" *ngIf=\"game_info\">\n    <h2>{{game_info.name}}</h2>\n    <p>\n      <img src=\"{{game_info.thumbnail}}\">\n    </p>\n    <p>{{game_info.description}}</p>\n    <span class=\"players\">Players: </span>{{game_info.minPlayers}} - {{game_info.maxPlayers}}\n    <p>Type:</p>\n    <ul>\n      <li *ngFor=\"let game of game_info.mechanics\">\n          <span>{{game}}</span>\n      </li>\n    </ul>\n  </span>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/popular-game-info/popular-game-info.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var router_1 = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+var http_service_1 = __webpack_require__("./src/app/http.service.ts");
+var PopularGameInfoComponent = /** @class */ (function () {
+    function PopularGameInfoComponent(_httpService, _route) {
+        this._httpService = _httpService;
+        this._route = _route;
+    }
+    PopularGameInfoComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._route.params.subscribe(function (params) {
+            _this.game_id = params['id'];
+            console.log(_this.game_id);
+        });
+        this.retrieveIndvidualGame();
+    };
+    PopularGameInfoComponent.prototype.retrieveIndvidualGame = function () {
+        var _this = this;
+        var game_info = this._httpService.retrieveIndividualGame(this.game_id);
+        game_info.subscribe(function (data) {
+            _this.game_info = data;
+        });
+    };
+    PopularGameInfoComponent = __decorate([
+        core_1.Component({
+            selector: 'app-popular-game-info',
+            template: __webpack_require__("./src/app/popular-game-info/popular-game-info.component.html"),
+            styles: [__webpack_require__("./src/app/popular-game-info/popular-game-info.component.css")]
+        }),
+        __metadata("design:paramtypes", [http_service_1.HttpService,
+            router_1.ActivatedRoute])
+    ], PopularGameInfoComponent);
+    return PopularGameInfoComponent;
+}());
+exports.PopularGameInfoComponent = PopularGameInfoComponent;
 
 
 /***/ }),

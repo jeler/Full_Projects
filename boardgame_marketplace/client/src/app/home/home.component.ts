@@ -13,12 +13,10 @@ export class HomeComponent implements OnInit {
   constructor(private _httpService: HttpService, private _router: Router) { }
   UserReg: any;
   UserLog: any;
-  // errors: any;
   RegError;
   LogError;
   PwError;
   Lockout;
-  random: any;
   games: any;
 
   ngOnInit()
@@ -36,14 +34,12 @@ export class HomeComponent implements OnInit {
       email: "",
       password: ""
     }
-    this.getrandomGame();
     this.retrievepopularGame();
   }
     onSubmit(UserReg)
     {
       let newUser = this._httpService.createNewUser(this.UserReg);
       newUser.subscribe(data => {
-        console.log(data,"Got user!")
         if(data["err"])
         {
           this.RegError = data['err'];
@@ -58,7 +54,6 @@ export class HomeComponent implements OnInit {
     {
       let User = this._httpService.loginUser(this.UserLog);
       User.subscribe(data => {
-        console.log(data);
         if(data["err"] || data["pw_error"] || data["lockout"])
         {
           this.LogError= data["err"]
@@ -69,9 +64,8 @@ export class HomeComponent implements OnInit {
               
               this.Lockout = data["lockout"];
               console.log(this.Lockout)
-              this._router.navigateByUrl("/")          
-            }
-          
+              this._router.navigateByUrl("/") 
+            }     
         }
         else
         {
@@ -79,23 +73,11 @@ export class HomeComponent implements OnInit {
         }
       })
     }
-
-    getrandomGame()
-    {
-      let random = this._httpService.randomGame()
-      random.subscribe(data => {
-        console.log("this is data", data)
-        this.random = data["result"]
-        console.log(this.random);
-      })
-    }
     retrievepopularGame(): void
     {
       let game_list = this._httpService.retrievePopularGames()
       game_list.subscribe(games => {
-        console.log("this is data from bcg!", games)
         this.games = games
-        console.log(this.games)
       })
     }
 

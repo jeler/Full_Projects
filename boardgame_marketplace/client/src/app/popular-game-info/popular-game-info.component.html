@@ -1,0 +1,16 @@
+<div class="container">
+  <span class="game_info" *ngIf="game_info">
+    <h2>{{game_info.name}}</h2>
+    <p>
+      <img src="{{game_info.thumbnail}}">
+    </p>
+    <p>{{game_info.description}}</p>
+    <span class="players">Players: </span>{{game_info.minPlayers}} - {{game_info.maxPlayers}}
+    <p>Type:</p>
+    <ul>
+      <li *ngFor="let game of game_info.mechanics">
+          <span>{{game}}</span>
+      </li>
+    </ul>
+  </span>
+</div>

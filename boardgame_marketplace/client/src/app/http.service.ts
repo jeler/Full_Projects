@@ -65,4 +65,9 @@ export class HttpService {
     return this._http
     .get(this.popularBoardgameUrl)
   }
+
+  retrieveIndividualGame(id)
+  {
+    return this._http.get('https://bgg-json.azurewebsites.net/thing/' + id)
+  }
 }

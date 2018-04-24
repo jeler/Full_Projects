@@ -12,6 +12,7 @@ import { FilterPipe }from './filter.pipe';
 import { CreateBoardgameComponent } from './create-boardgame/create-boardgame.component';
 import { AllboardgamesComponent } from './allboardgames/allboardgames.component';
 import { EditBoardgamesComponent } from './edit-boardgames/edit-boardgames.component';
+import { PopularGameInfoComponent } from './popular-game-info/popular-game-info.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EditBoardgamesComponent } from './edit-boardgames/edit-boardgames.compo
     FilterPipe,
     CreateBoardgameComponent,
     AllboardgamesComponent,
-    EditBoardgamesComponent
+    EditBoardgamesComponent,
+    PopularGameInfoComponent
   ],
   imports: [
     BrowserModule,

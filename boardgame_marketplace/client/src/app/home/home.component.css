@@ -4,7 +4,7 @@
 }
 
 .bgoftheday {
-    color:blue;
+    color: #343a40;
 }
 .error {
     color: red;
@@ -33,10 +33,13 @@
     font-size: medium;
     color: white;
     padding: 0.8em 0.7em 0 0.7em;
-    background-color: #607D8B;
+    background: #343a40;    
     position: relative;
 }
-.game_pic
-{
-    object-fit: contain;
-}
+
+.badge:hover {
+    color: #343a40;
+    background-color: #DDD;
+    left: .1em;
+    cursor: pointer; cursor: hand;
+  }

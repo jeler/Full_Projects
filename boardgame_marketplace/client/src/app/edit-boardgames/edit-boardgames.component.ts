@@ -44,7 +44,7 @@ export class EditBoardgamesComponent implements OnInit {
     })
   }
 
-  editBoardgame(game) 
+  editBoardgame(game): void
   {
     let edited_game = this._httpService.editGame(this.game)
     .subscribe(edited_game => {
