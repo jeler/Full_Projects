@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   UserLog: any;
   RegError;
   LogError;
-  PwError;
   Lockout;
   games: any;
 
@@ -56,8 +55,7 @@ export class HomeComponent implements OnInit {
       User.subscribe(data => {
         if(data["err"] || data["pw_error"] || data["lockout"])
         {
-          this.LogError= data["err"]
-          this.PwError = data["pw_error"]
+          this.LogError= data["err"] || data["pw_error"]
           
             if(data["lockout"] === true)
             {

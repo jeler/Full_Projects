@@ -11,7 +11,6 @@ class UserController {
         User.find({ email: req.body.email }, function (err, user) {
             console.log(user)
             if (user.length != 0) {
-                console.log("user exists")
                 res.json({ err: "User already exists!" })
             }
             else {
@@ -42,26 +41,23 @@ class UserController {
         User.find({ email: req.body.email }, function (err, user)
         // find user in db
         {
-            console.log(user, "in conroller!")
             if (user.length == 0) {
                 // login_attempts++;
                 // console.log("this is login_attempts",login_attempts);
                 // user doesn't exist
                 // increment login attempt
-                res.json({ err: "User does not exist!" })
+                res.json({ err: "Invalid Credentials!" })
             }
             else 
             {
             bcrypt.compare(req.body.password, user[0].password)
                 .then(same => {
-                    console.log(user[0].id, "user id?");
                     req.session.user_id = user[0].id
                     var session_user = req.session.user_id
-                    console.log(session_user, "session user at 66!")
                     res.json({user: user, session_user: session_user});
                 })
                 .catch(function (err) {
-                    res.json({ pw_error: "Incorrect password!" })
+                    res.json({ pw_error: "Invalid Credentials!" })
                 })
             }
         })
@@ -74,7 +70,6 @@ class UserController {
 
     checkSessionId(req, res) {
         console.log(req.session.user_id, "do you exist here?");
-        // console.log(session_user)
         if (req.session.user_id === undefined) {
             res.json({session: false})
         }

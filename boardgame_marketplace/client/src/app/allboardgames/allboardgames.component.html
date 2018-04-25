@@ -4,6 +4,7 @@
   <h1>Welcome {{user_info?.first_name}}</h1>
   <div class="game row mb-3" *ngFor="let games of allGames | filter:'title':searchText">
     <div class="col-9">
+      {{games._id}}
       <h2>{{games.title}}</h2>
       <p>{{games.description}}</p>
       <p>Condition: {{games.condition}}</p>
@@ -11,13 +12,32 @@
     <div class="col-3">
       <h2>${{games.price}}</h2>
       <p>{{games.location}}</p>
-      <!-- <div class="buttons row"> -->
-        <!-- <div class="col-6"> -->
-          <button *ngIf="(games._user) === (session)" class="btn btn-danger" (click)="deleteGame(games._id)">Delete</button> 
-          <button *ngIf="(games._user) == (session)" class="btn btn-info" routerLink='/edit/{{games._id}}'>Edit Listing</button>
-          <button *ngIf="(games._user) != (session)" class="btn btn-info">Contect Seller</button>
-        <!-- </div> -->
-      <!-- </div> -->
+      <button *ngIf="(games._user._id) === (session)" class="btn btn-danger" (click)="deleteGame(games._id)">Delete</button>
+      <button *ngIf="(games._user._id) == (session)" class="btn btn-info" routerLink='/edit/{{games._id}}'>Edit Listing</button>
+      <button *ngIf="(games._user._id) != (session)" class="btn btn-info" data-toggle="modal" data-target="#contactInfoModal">Contect Seller</button>
+      {{games._user.first_name}}
+      <!-- Modal -->
+      <div class="modal fade" id="contactInfoModal" tabindex="-1" role="dialog" aria-labelledby="contactInfoLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="contactInfoLabel">Seller Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" *ngIf="allGames">
+              {{games._id}}
+              {{games._user._id}}
+              {{games._user.email}}
+              {{games._user.first_name}} {{games._user.last_name}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- <p-dialog header="Title" [(visible)]="display" *ngIf="games._user != session">
             <!-- <button type="button" class="btn btn-primary" >Placeholder</button> -->

@@ -43,6 +43,9 @@ export class AllboardgamesComponent implements OnInit
   getGames()
   {
     let allGames = this._httpService.getAllGames().subscribe(data => {
+      console.log(data, "this is data")
+      console.log(data["games"][1]._user.first_name)
+      console.log(data["games"][1]) 
       this.allGames = data["games"];
     })
   }

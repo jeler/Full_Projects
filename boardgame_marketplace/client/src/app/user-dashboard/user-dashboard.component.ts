@@ -16,6 +16,8 @@ export class UserDashboardComponent implements OnInit {
   user_info: any;
   allGames: any;
   session: any;
+  game_id: number;
+  game: any;
 
   ngOnInit() 
   {
@@ -53,5 +55,10 @@ export class UserDashboardComponent implements OnInit {
       console.log(this.allGames)
     })
   }
-
+  // getGame(): void {
+  //   let chosenGame = this._httpService.getGame(this.game_id).subscribe(data => {
+  //     this.game = data["game"]
+  //     console.log(this.game, "this is this.game")
+  //   })
+  // }
 }

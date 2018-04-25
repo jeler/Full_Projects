@@ -10,7 +10,7 @@ class BoardGameController {
         console.log(req.session.user_id)
         User.findOne({ _id: req.session.user_id }, function (err, user) {
             if (user) {
-                console.log("in user!")
+                console.log("in user when creating game!!")
                 var boardgame = new BoardGame(req.body);
                 boardgame._user = user._id;
                 user.boardgames.push(boardgame);
@@ -31,13 +31,14 @@ class BoardGameController {
 
     findgames(req, res) {
         BoardGame.find({})
-            .populate('User')
+            .populate('_user')
             .exec(function (err, games) {
                 if (err) {
                     res.json({ message: "frowny face" })
                 }
                 else {
                     console.log(games, "this is games at line 47!")
+                    console.log(games._user, "games user")
                     res.json({ games })
                 }
             })
@@ -104,8 +105,6 @@ class BoardGameController {
             }
             else
             {
-                console.log(game, "this is game in controller!")
-                console.log(req.body)
                 res.json({ game })
             }
         }

@@ -32,6 +32,7 @@ export class HttpService {
   }
   createBoardGame(BoardGameCreate)
   {
+    console.log("here in service", BoardGameCreate)
     return this._http.post('creategame', BoardGameCreate)
   }
 

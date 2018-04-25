@@ -20,10 +20,14 @@ var BoardGameSchema = new mongoose.Schema({
     {
         type: Number, required: true
     },
-    location:
-    {
-        type: String, required: true
-    },
+    // city:
+    // {
+    //     type: String, required: true
+    // },
+    // state:
+    // {
+    //     type: String, required: true
+    // },
     condition:
     {
         type: String, required: true
